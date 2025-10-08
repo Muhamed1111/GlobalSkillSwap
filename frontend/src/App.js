@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 
@@ -11,68 +12,36 @@ import Skills from "./pages/skills";
 import Profile from "./pages/profile";
 import SignIn from "./pages/appwrite/sign-in";
 import Login from "./pages/appwrite/login";
+  
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Sidebar from "./components/sidebar";
+import "./App.css";
 
 const App = () => {
-  const location = useLocation();
-
-  // Rute gdje se NE prikazuje header/sidebar
-    const hideLayout =location.pathname === "/appwrite/login" 
-    || location.pathname === "/appwrite/sign-in";
-
   return (
     <div className="app">
-      {/* Header i Sidebar samo ako nije login stranica */}
-      {!hideLayout && (
-        <>
-          <Header
-            title="Global Skill Swap"
-            font="italic"
-            size="3rem"
-            color="green"
-          />
-          <Sidebar active={true} />
-        </>
-      )}
+      {/* HEADER */}
+      <Header
+        title="Global Skill Swap"
+        font="italic"
+        size="2.5rem"
+        color="#FFD700"
+      />
 
-      {/* Navigacija (također skrivena na loginu) */}
-      {!hideLayout && (
-        <nav
-          style={{
-            padding: "10px",
-            margin: "10px",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "20px",
-          }}
-        >
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/skills">Skills</Link>
-          <Link to="/profile">Profile</Link>
-          <Link to="/appwrite/sign-in">Sign In</Link>
-          <Link to="/appwrite/login">Log In</Link>
-        </nav>
-      )}
 
-      {/* Rute */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/appwrite/sign-in" element={<SignIn />} />
-        <Route path="/appwrite/login" element={<Login />} />
-        <Route
-          path="*"
-          element={
-            <div style={{ textAlign: "center", marginTop: "40px" }}>
-              <h2>404 - Page Not Found</h2>
-            </div>
-          }
-        />
-      </Routes>
+      {/* GLAVNI SADRŽAJ */}
+      <main className={`main-content`}>
+        <div className="content-box">
+          <h2>Welcome to Global Skill Swap</h2>
+          <p>
+            Discover and exchange skills worldwide. Connect, learn, and grow
+            together in a global network of passionate learners.
+          </p>
+          <button className="action-btn">Explore Now</button>
+        </div>
+      </main>
+
     </div>
   );
 };

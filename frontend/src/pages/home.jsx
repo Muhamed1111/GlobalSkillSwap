@@ -1,28 +1,70 @@
-import React from "react";
+import React , {useLocation} from "react";
+
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const location = useLocation();
+
+  // Rute gdje se NE prikazuje header/sidebar
+    const hideLayout =location.pathname === "/appwrite/login" 
+    || location.pathname === "/appwrite/sign-in";
+
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Welcome to Global Skill Swap!</h1>
-      <p>Click below to access the login page.</p>
-      <Link to="/appwrite/login">
-        <button
+    <div className="app">
+      {/* Header i Sidebar samo ako nije login stranica */}
+      {!hideLayout && (
+        <>
+          <Header
+            title="Global Skill Swap"
+            font="italic"
+            size="3rem"
+            color="green"
+          />
+          <Sidebar active={true} />
+        </>
+      )}
+
+      {/* Navigacija (također skrivena na loginu) */}
+      {!hideLayout && (
+        <nav
           style={{
-            marginTop: "10px",
-            padding: "10px 20px",
-            backgroundColor: "green",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
+            padding: "10px",
+            margin: "10px",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "20px",
           }}
         >
-          Go to Login
-        </button>
-      </Link>
-    </div>
-  );
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/skills">Skills</Link>
+          <Link to="/profile">Profile</Link>
+          <Link to="/appwrite/sign-in">Sign In</Link>
+          <Link to="/appwrite/login">Log In</Link>
+        </nav>
+      )}
+
+      {/* Rute */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/skills" element={<Skills />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/appwrite/sign-in" element={<SignIn />} />
+        <Route path="/appwrite/login" element={<Login />} />
+        <Route
+          path="*"
+          element={
+            <div style={{ textAlign: "center", marginTop: "40px" }}>
+              <h2>404 - Page Not Found</h2>
+            </div>
+          }
+        />
+      </Routes>
+      </div>
+      );
 };
 
 export default Home;

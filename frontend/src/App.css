@@ -1,6 +1,98 @@
-.App {
+/* Pozadina – gradijent crne i "karo" (crveno-ružičaste) */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0b0b0b 10%, #e0d03d 120%);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Glavni sadržaj */
+.main-content {
+  flex: 1;
+  transition: margin-left 0.3s ease;
+  padding: 60px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content.shifted {
+  margin-left: 220px; /* širina sidebar-a */
+}
+
+/* "Glass" efekat boxa */
+.content-box {
+  background: rgba(220, 204, 28, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 40px 50px;
+  border-radius: 20px;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(232, 216, 47, 0.25);
+}
+
+.content-box h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #d1c521;
+  letter-spacing: 1px;
+}
+
+.content-box p {
+  font-size: 1.1rem;
+  color: #ddd;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Dugme */
+.action-btn {
+  background: linear-gradient(90deg, #b1a031, #887c0e);
+  border: none;
+  padding: 12px 28px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(211, 208, 16, 0.5);
+}
+
+/* Scrollbar (opcionalno) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bbad15;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+
+
+/* HERO sekcija */
+.hero-section {
+  position: relative;
+  height: 80vh;
+  /* background: url("./assets/menu.jpg") center center/cover no-repeat; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
   text-align: center;
 }
+
 
 .App-link {
   color: #61dafb;
@@ -21,3 +113,325 @@ button:hover {
 }
 
 
+
+.hero-content h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  color: #cfcfcf;
+  margin-bottom: 30px;
+}
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 60px; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background: linear-gradient(90deg, #3c300dff 20%, #514f03ff 60%, #988e34ff 100%);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu-btn:hover {
+  color: #4ea3ff;
+}
+
+.cta-button {
+  background-color: #ff3366;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #ff1a4d;
+}
+
+/* KARTICE */
+.cards-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #0d0d1a;
+  color: white;
+  padding: 60px 20px;
+  gap: 30px;
+}
+
+.card {
+  background-color: #1a1a33;
+  border-radius: 10px;
+  padding: 30px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.05);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  background-color: #26264d;
+}
+
+.card i {
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: #4ea3ff;
+}
+
+/* SEKCIJA PROIZVODA */
+.products-section {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 40px;
+  padding: 70px 20px;
+  background-color: #121226;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.product-box {
+  background-color: #1a1a33;
+  border-radius: 12px;
+  padding: 30px;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(255,255,255,0.05);
+  transition: 0.3s;
+}
+
+.product-box:hover {
+  transform: translateY(-6px);
+  background-color: #26264d;
+}
+
+.product-box h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.product-box p {
+  font-size: 15px;
+  color: #bbb;
+  margin-bottom: 15px;
+}
+
+.learn-more {
+  text-decoration: none;
+  color: #4ea3ff;
+  font-weight: bold;
+}
+
+.learn-more:hover {
+  text-decoration: underline;
+}
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background-color: #1e1e2f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar-title {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 30px;
+  font-style: italic;
+  color: #4ea3ff;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar-nav a {
+  text-decoration: none;
+  color: #ddd;
+  font-size: 1rem;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.sidebar-nav a:hover {
+  background-color: #2b2b44;
+  color: #4ea3ff;
+  padding-left: 15px;
+}
+
+.signin-btn {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #4ea3ff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.signin-btn:hover {
+  background-color: #3a8ee6;
+}
+
+.signin-btn a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    width: 180px;
+    height: 100%;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+}
+
+/* === HEADER STYLING (ZLATNO–CRNA TEMA) === */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 35px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 60%, #2b2b2b 100%);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Zlatni gradijent unutar naslova */
+.header-title {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #e6b800, #ffd700, #fff3b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.4s ease;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.header-title:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 15px #ffd700);
+}
+
+/* Hamburger dugme – zlatni okvir */
+.menu-btn {
+  background: none;
+  border: 2px solid #ffd700;
+  color: #ffd700;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 5px 10px;
+  transition: 0.3s ease;
+}
+
+.menu-btn:hover {
+  background-color: #ffd700;
+  color: #000;
+  transform: rotate(90deg);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* Dugme za login */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 35px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background: linear-gradient(90deg, #3c300dff 20%, #514f03ff 60%, #988e34ff 100%);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25);
+}
+
+/* grupisane tipke s desne strane */
+.header-right {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* zajednički izgled tipki */
+.login-btn,
+.register-btn {
+  background: linear-gradient(90deg, #e6b800, #ffd700, #ffec8b);
+  border: none;
+  padding: 8px 20px;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.login-btn:hover,
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+}
