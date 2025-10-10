@@ -1,306 +1,215 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import signInBg from "../../asserts/images/login.png";
 import Button from "../../components/Button";
-import { Link } from "react-router-dom";
+import "./signIn.css";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [step, setStep] = useState(1); 
+
+  
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = `
+      input:focus, textarea:focus {
+        border-color: #FFD700 !important;
+        background: rgba(255, 215, 0, 0.15) !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        outline: none;
+      }
+    `;
+    document.head.appendChild(style);
+  }, []);
+
+  const nextStep = () => setStep((s) => Math.min(4, s + 1));
+  const prevStep = () => setStep((s) => Math.max(1, s - 1));
+
   return (
     <div
       className="sign-in"
       style={{
-        backgroundImage: `url(${signInBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "40px",
-        margin: "0px",
+        backgroundImage: `
+          radial-gradient(circle at center, rgba(255, 215, 0, 0.15), rgba(0, 0, 0, 0.9)),
+          url(${signInBg})
+        `,
       }}
     >
-      <div
-        className="sign-in-card"
-        style={{
-          backgroundColor: "rgba(0,0,0,0.7)",
-          padding: "40px",
-          borderRadius: "15px",
-          color: "white",
-          textAlign: "center",
-          boxShadow: "0 4px 25px rgba(0,0,0,0.6)",
-          width: "85vw",
-          height: "85vh",
-          overflowY: "auto",
-        }}
-      >
-        {/* Header */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "30px",
-              fontWeight: "700",
-              color: "#f5d142",
-            }}
-          >
-            Create Your Global Skill Swap Profile
-          </h2>
-          <p style={{ fontSize: "14px" }}>
+      <div className="sign-in-card">
+        
+        <div className="sign-in-header">
+          <h2>Create Your Global Skill Swap Profile</h2>
+          <p>
             Already have an account?{" "}
-            <Link
-              to="/appwrite/login"
-              style={{
-                color: "#e8c428ff",
-                textDecoration: "none",
-                fontWeight: "600",
-              }}
-            >
+            <Link to="/login" className="gold-link">
               Log In
             </Link>
           </p>
         </div>
 
-        <hr style={{ margin: "20px 0", opacity: 0.3 }} />
+       
+        <div className="progress-container">
+          <div className="progress-bar" style={{ width: `${(step / 4) * 100}%` }}></div>
+        </div>
 
-        {/* Forma podijeljena po sekcijama */}
-        <form
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "25px 40px",
-            textAlign: "left",
-          }}
-        >
-          {/* 🔹 PERSONAL INFORMATION */}
-          <div style={{ gridColumn: "1 / span 2" }}>
-            <h3 style={sectionTitle}>Personal Information</h3>
-          </div>
+       
+        <form className="sign-in-form">
+          
+          {step === 1 && (
+            <>
+              <h3 className="section-title">Personal Information</h3>
 
-          <label style={labelStyle}>
-            First Name
-            <input type="text" placeholder="John" required style={inputStyle} />
-          </label>
+              <label>
+                First Name
+                <input type="text" placeholder="John" required />
+              </label>
 
-          <label style={labelStyle}>
-            Last Name
-            <input type="text" placeholder="Doe" required style={inputStyle} />
-          </label>
+              <label>
+                Last Name
+                <input type="text" placeholder="Doe" required />
+              </label>
 
-          <label style={labelStyle}>
-            Nickname / Username
-            <input
-              type="text"
-              placeholder="@john_doe"
-              required
-              style={inputStyle}
-            />
-          </label>
+              <label>
+                Nickname / Username
+                <input type="text" placeholder="@john_doe" required />
+              </label>
 
-          <label style={labelStyle}>
-            Profile Picture
-            <input
-              type="file"
-              accept="image/*"
-              style={{
-                ...inputStyle,
-                backgroundColor: "rgba(255,255,255,0.1)",
-                padding: "6px",
-              }}
-            />
-          </label>
+              <label>
+                Profile Picture
+                <input type="file" accept="image/*" className="file-input" />
+              </label>
 
-          <label style={labelStyle}>
-            Email
-            <input
-              type="email"
-              placeholder="example@mail.com"
-              required
-              style={inputStyle}
-            />
-          </label>
+              <label>
+                Email
+                <input type="email" placeholder="example@mail.com" required />
+              </label>
 
-          <label style={labelStyle}>
-            Date of Birth
-            <input type="date" required style={inputStyle} />
-          </label>
+              <label>
+                Date of Birth
+                <input type="date" required />
+              </label>
 
-          <label style={labelStyle}>
-            Password
-            <input
-              type="password"
-              placeholder="••••••"
-              required
-              style={inputStyle}
-            />
-          </label>
+              <label>
+                Password
+                <input type="password" placeholder="••••••" required />
+              </label>
 
-          <label style={labelStyle}>
-            Confirm Password
-            <input
-              type="password"
-              placeholder="••••••"
-              required
-              style={inputStyle}
-            />
-          </label>
+              <label>
+                Confirm Password
+                <input type="password" placeholder="••••••" required />
+              </label>
+            </>
+          )}
 
-          <label style={labelStyle}>
-            Time Zone
-            <input type="text" placeholder="CET / GMT+1" style={inputStyle} />
-          </label>
+         
+          {step === 2 && (
+            <>
+              <h3 className="section-title">Skill Details</h3>
 
-          <label style={labelStyle}>
-            Languages
-            <input
-              type="text"
-              placeholder="English, Bosnian, Turkish..."
-              style={inputStyle}
-            />
-          </label>
+              <label>
+                Skills you offer
+                <input type="text" placeholder="Web Development, Design..." required />
+              </label>
 
-          {/* 🔹 SKILL DETAILS */}
-          <div style={{ gridColumn: "1 / span 2" }}>
-            <h3 style={sectionTitle}>Skill Details</h3>
-          </div>
+              <label>
+                Skills you want to learn
+                <input type="text" placeholder="Python, Video Editing..." />
+              </label>
 
-          <label style={labelStyle}>
-            Skills you offer
-            <input
-              type="text"
-              placeholder="Web Development, Design, Marketing..."
-              required
-              style={inputStyle}
-            />
-          </label>
+              <label>
+                Years of Experience
+                <input type="number" min="0" placeholder="e.g. 3" />
+              </label>
 
-          <label style={labelStyle}>
-            Skills you want to learn
-            <input
-              type="text"
-              placeholder="Python, Video Editing..."
-              style={inputStyle}
-            />
-          </label>
+              <label>
+                Short Bio
+                <textarea placeholder="Tell us about yourself..." />
+              </label>
+            </>
+          )}
 
-          <label style={labelStyle}>
-            Years of Experience
-            <input
-              type="number"
-              min="0"
-              placeholder="e.g. 3"
-              required
-              style={inputStyle}
-            />
-          </label>
+          
+          {step === 3 && (
+            <>
+              <h3 className="section-title">Professional Background</h3>
 
-          <label style={labelStyle}>
-            Short Bio
-            <textarea
-              placeholder="Tell us about yourself, your background, and what motivates you..."
-              rows="3"
-              style={textAreaStyle}
-            />
-          </label>
+              <label>
+                Education
+                <input
+                  type="text"
+                  placeholder="Faculty of Electrical Engineering, Sarajevo"
+                  required
+                />
+              </label>
 
-          {/* 🔹 PROFESSIONAL BACKGROUND */}
-          <div style={{ gridColumn: "1 / span 2" }}>
-            <h3 style={sectionTitle}>Professional Background</h3>
-          </div>
+              <label>
+                Years Active in Profession
+                <input type="number" min="0" placeholder="e.g. 2" />
+              </label>
+            </>
+          )}
 
-          <label style={labelStyle}>
-            Education
-            <input
-              type="text"
-              placeholder="Faculty of Electrical Engineering, Sarajevo"
-              required
-              style={inputStyle}
-            />
-          </label>
+          
+          {step === 4 && (
+            <>
+              <h3 className="section-title">Portfolio & Links</h3>
 
-          <label style={labelStyle}>
-            Years Active in Profession
-            <input
-              type="number"
-              min="0"
-              placeholder="e.g. 2"
-              style={inputStyle}
-            />
-          </label>
+              <label>
+                GitHub or Portfolio link
+                <input type="url" placeholder="https://github.com/username" />
+              </label>
 
-          {/* 🔹 LINKS / PORTFOLIO */}
-          <div style={{ gridColumn: "1 / span 2" }}>
-            <h3 style={sectionTitle}>Portfolio & Links</h3>
-          </div>
+              <label>
+                LinkedIn or YouTube link
+                <input type="url" placeholder="https://linkedin.com/in/username" />
+              </label>
 
-          <label style={labelStyle}>
-            GitHub or Portfolio link
-            <input
-              type="url"
-              placeholder="https://github.com/username"
-              style={inputStyle}
-            />
-          </label>
-
-          <label style={labelStyle}>
-            LinkedIn or YouTube link
-            <input
-              type="url"
-              placeholder="https://linkedin.com/in/username"
-              style={inputStyle}
-            />
-          </label>
+              <p className="final-text">
+                ✅ Review your details before creating your account.
+              </p>
+            </>
+          )}
         </form>
 
-        <div style={{ marginTop: "30px" }}>
-          <Button
-            color="#e8c428ff"
-            text="Create Account"
-            padding="12px 20px"
-            fontSize="1.3rem"
-            borderRadius="10px"
-            textColor="white"
-            hoverColor="#d8b205ff"
-            transition="0.35s ease"
-          />
+       
+        <div className="step-buttons">
+          {step > 1 && (
+            <button
+              className="btnn-style"
+              onClick={(e) => {
+                e.preventDefault(); 
+                prevStep(); 
+              }}
+            >Back</button>
+          )}
+
+          {step < 4 ? (
+            <button className="btn-style"
+              onClick={(e) => {
+                e.preventDefault(); 
+                nextStep(); 
+              }}
+            >Next</button>
+          ) : (
+            <Button
+              color="#d4af37"
+              text="Create Account"
+              padding="14px 24px"
+              fontSize="1.2rem"
+              borderRadius="10px"
+              textColor="black"
+              hoverColor="#f1c232"
+              transition="0.35s ease"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/login"); 
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
   );
-};
-
-/* ✅ Pomoćni stilovi */
-const labelStyle = { fontSize: "15px", textAlign: "left" };
-const sectionTitle = {
-  color: "#e8c428",
-  fontWeight: "600",
-  margin: "10px 0",
-  fontSize: "18px",
-  textAlign: "left",
-  borderBottom: "1px solid rgba(255,255,255,0.2)",
-  paddingBottom: "5px",
-};
-const inputStyle = {
-  width: "100%",
-  padding: "8px",
-  marginTop: "5px",
-  borderRadius: "6px",
-  border: "1px solid #ccc",
-  fontSize: "14px",
-};
-const textAreaStyle = {
-  width: "100%",
-  padding: "8px",
-  marginTop: "5px",
-  borderRadius: "6px",
-  border: "1px solid #ccc",
-  fontSize: "14px",
-  resize: "none",
 };
 
 export default SignIn;

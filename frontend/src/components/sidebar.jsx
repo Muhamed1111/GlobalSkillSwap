@@ -1,23 +1,23 @@
 import React from "react";
-import "../App.css"
-
-const Sidebar = ({ active ,onMenuToggle}) => {
+import { Link } from "react-router-dom";
+import "../App.css";
+import "../pages/appwrite/signIn.css"
+const Sidebar = ({ active, onMenuToggle }) => {
   return (
     <div className={`sidebar ${active ? "active" : "hidden"}`}>
       <h2 className="sidebar-title">Menu</h2>
-      <button className="menu-btn" onClick={onMenuToggle} style={{position:"absolute", right:"10px"}}>
-          ☰
-        </button>
+
       <nav className="sidebar-nav">
-        <a href="/home">🏠 Home</a>
-        <a href="/how">⚙️ How it Works</a>
-        <a href="/about">ℹ️ About</a>
-        <a href="/skills">💡 Skills</a>
-        <a href="/post">📝 Post</a>
-        <a href="/profile">👤 Profile</a>
-        <button className="signin-btn">
-          <a href="/sign_in">Sign In</a>
-        </button>
+        <Link to="/home" onClick={onMenuToggle}>🏠 Home</Link>
+        <Link to="/how" onClick={onMenuToggle}>⚙️ How it Works</Link>
+        <Link to="/about" onClick={onMenuToggle}>ℹ️ About</Link>
+        <Link to="/skills" onClick={onMenuToggle}>💡 Skills</Link>
+        <Link to="/post" onClick={onMenuToggle}>📝 Post</Link>
+        <Link to="/profile" onClick={onMenuToggle}>👤 Profile</Link>
+
+       
+        <Link className="bottom-link" to="/">Log Out</Link>
+        
       </nav>
     </div>
   );

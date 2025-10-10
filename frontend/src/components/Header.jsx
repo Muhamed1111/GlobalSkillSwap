@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
-
-const Header = ({ title, font, size, color, onMenuToggle }) => {
+import "./Header.css"
+const Header = ({ title, font, size, color }) => {
   return (
     <header
       className="header"
@@ -13,17 +14,22 @@ const Header = ({ title, font, size, color, onMenuToggle }) => {
         color: color || "#FFD700",
       }}
     >
+        
       <div className="header-left">
-        {/* <button className="menu-btn" onClick={onMenuToggle}>
-          ☰
-        </button> */}
         <h1 className="header-title">{title}</h1>
       </div>
 
-      {/* GRUPISANE DUGMADI */}
       <div className="header-right">
-        <button className="login-btn">Sign In</button>
-        <button className="register-btn">Register</button>
+        <Link to="/home">
+         <button className="login-btn">Home</button>
+        </Link>
+        <Link to="/login">
+          <button className="login-btn">Sign In</button>
+        </Link>
+
+        <Link to="/register">
+          <button className="register-btn">Register</button>
+        </Link>
       </div>
     </header>
   );

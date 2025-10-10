@@ -19,7 +19,9 @@ const login = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 padding: "0px",
-                margin: "0px"
+                margin: "0px",
+                paddingTop: "120px"
+
             }}
             className="login">
             <div
@@ -104,7 +106,7 @@ const login = () => {
                     <p style={{ marginTop: "15px", fontSize: "14px" }}>
                         Don't have an account?{" "}
                         <Link
-                            to="/appwrite/sign-in"
+                            to="/sign-in"
                             style={{
                                 color: "#e8c428ff",
                                 textDecoration: "none",

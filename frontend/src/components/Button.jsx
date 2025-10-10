@@ -10,9 +10,10 @@ const Button = ({
   textColor = "white",
   hoverColor = "#0056b3",
   transition = "0.3s ease",
+  
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-
+ 
   return (
     <button
       style={{
@@ -26,6 +27,7 @@ const Button = ({
         transition: `background-color ${transition}, transform ${transition}`,
         transform: isHovered ? "scale(1.08)" : "scale(1)",
       }}
+      
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
