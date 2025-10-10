@@ -1,7 +1,8 @@
 import React from "react";
-import "./table.css"
+import "./table.css";
+
 const Table = ({ head = [], fields = [], array = [], title }) => {
-  // 🔹 Umjesto createElement, koristimo JSX
+
   function createTable(head, data) {
     const thead = [];
     const tbody = [];
@@ -33,17 +34,18 @@ const Table = ({ head = [], fields = [], array = [], title }) => {
       );
     }
 
-    // 🔹 Vraćamo JSX elemente koje React zna prikazati
     return (
-      <table className="custom-table">
-        <caption>{title}</caption>
-        <thead>{thead}</thead>
-        <tbody>{tbody}</tbody>
-      </table>
+      <div className="table-wrapper">
+        <table className="custom-table">
+          {title && <caption>{title}</caption>}
+          <thead>{thead}</thead>
+          <tbody>{tbody}</tbody>
+        </table>
+      </div>
     );
   }
 
-  // 🔹 Glavni return
+
   return <div className="table-container">{createTable(head, array)}</div>;
 };
 

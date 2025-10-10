@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const cv = () => {
+const cv = () => {
   return (
     <div>cv</div>
   )
 }
+
+export default cv

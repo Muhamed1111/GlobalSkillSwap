@@ -74,8 +74,7 @@ const App = () => {
         <Route path="/post" element={<Post />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-      <button text="Dark" onClick={toDarkTheme} style={{padding:"10px"}}>Dark</button>
-                  <button text="Light" onClick={toLightTheme} />
+      
     </div>
   );
 };

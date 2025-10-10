@@ -9,10 +9,14 @@ import Login from "./appwrite/login";
 import SignIn from "./appwrite/sign-in";
 import Button from "../components/Button";
 import Table from "../components/Table";
+import Chart from "../components/Chart";
 import "../App.css"
+import MenuHeader from "../components/MenuHeader";
+
+
 const user = {
-    name:"Muha",
-    lastName:"Mujic"
+  name: "Muha",
+  lastName: "Mujic"
 }
 
 const head = ["Ime", "Prezime", "Bodovi"];
@@ -39,56 +43,76 @@ const Home = () => {
 
   return (
     <div className="app">
+        <MenuHeader />
+      {/*home content*/}
+      <div>
+        <div
+          style={{
+            //background: "linear-gradient(90deg, rgba(40,40,40,0.9), rgba(0,0,0,0.95))",
+            background: "linear-gradient(90deg, #190e53ff, #8f70ff)",
+            border: "1px solid rgba(255,215,0,0.3)",
+            boxShadow: "0 0 10px rgba(255,215,0,0.2)",
+            padding: "20px",
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          <h3 style={{ lineHeight: "1.6" }}>
+            👋 Dobrodošao nazad, <span style={{ color: "#FFD700" }}>Ajdine</span>! <br />
+            Trenutno imaš{" "}
+            <span style={{ color: "#FFD700", fontWeight: "bold" }}>145 SkillPoints</span>,
+            što te svrstava među{" "}
+            <span style={{ color: "#FFD700", fontWeight: "bold" }}>Top 10% mentora</span> ove sedmice. <br />
+            Nastavi dijeliti svoje znanje — tvoj trud i iskustvo prave razliku! 🚀
+          </h3>
+        </div>
+          <br/>
+        <div>
 
-    {/*home content*/}
-    <div>
-        <h3>
-            👋 Dobrodošao nazad, Ajdine!
-Imaš trenutno 145 SkillPoints, što te svrstava među Top 10% mentora ove sedmice.
-Nastavi graditi svoj profil — tvoje znanje vrijedi!
-        </h3>
-<div>
+          <div>
+            <Chart>Graf</Chart>
+          </div>
 
-    <div>
-        Graf
-    </div>
+    <section className="actions-section">
+      <h2 className="actions-title">Šta želiš danas uraditi?</h2>
+      <div className="actions-grid">
+        <Button text="🧠 Offer lesson" />
+        <Button text="🎯 Reserve lesson" />
+        <Button text="💬 Job requests" />
+      </div>
+    </section>
 
-   
-    <section className="actions-grid">
-    <Button text="🧠 Offer lesson"/>
-    <Button text="🎯 Reserve lesson"/>
-    <Button text="💬 Job requests" /> 
-  </section>
 
-    <section className="stats-section">
-    <h2>Tvoj napredak</h2>
-    <div className="stats-cards">
-      <div>320 Bodova</div>
-      <div>8 Časova</div>
-      <div>Ocjena 4.9 ⭐</div>
-    </div>
-  </section>
+          <section className="stats-section">
+            <h2>Tvoj napredak</h2>
+            <div className="stats-cards">
+              <div>320 Bodova</div>
+              <div>8 Časova</div>
+              <div>Ocjena 4.9 ⭐</div>
+            </div>
+          </section>
 
-    
-    
-    {/* cards */}
-    
-        
-    
-    <Table title="Suggested mentors" 
-            head = {head}
-            fields = {fields}
-            array = {data}      
-            user = {user}/>
-    <Table title="Top mentors" 
-            head = {head}
-            fields = {fields}
-            array = {data}      
-            user = {user}/>
 
-</div>
 
-    </div>
+          {/* cards */}
+
+
+  
+          <Table title="Suggested mentors"
+            head={head}
+            fields={fields}
+            array={data}
+            user={user} />
+            
+          <Table title="Top mentors"
+            head={head}
+            fields={fields}
+            array={data}
+            user={user} />
+
+        </div>
+
+      </div>
 
       {/* Dugme za otvaranje/zatvaranje sidebar-a */}
       {!hideLayout && (
@@ -102,10 +126,10 @@ Nastavi graditi svoj profil — tvoje znanje vrijedi!
 
       {/* Sidebar */}
       {!hideLayout && (
-        <Sidebar active={sidebarOpen} onMenuToggle={toggleSidebar}  />
+        <Sidebar active={sidebarOpen} onMenuToggle={toggleSidebar} />
       )}
 
-      
+
 
       {/* Rute */}
       <Routes>
@@ -115,7 +139,7 @@ Nastavi graditi svoj profil — tvoje znanje vrijedi!
         <Route path="/contact" element={<Contact />} />
         <Route path="/appwrite/sign-in" element={<SignIn />} />
         <Route path="/appwrite/login" element={<Login />} />
-       
+
       </Routes>
     </div>
   );

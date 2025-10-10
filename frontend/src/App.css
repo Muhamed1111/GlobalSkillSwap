@@ -433,3 +433,139 @@ button:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
 }
+
+/* 🌟 Sekcija s akcijama */
+.actions-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 60px auto;
+  width: 90%;
+}
+
+.actions-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #c5a3ff;
+  text-shadow: 0 0 10px rgba(180, 100, 255, 0.4);
+  margin-bottom: 25px;
+}
+
+/* 🔘 Dugmad raspoređena u centru */
+.actions-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+/* 🎯 Dugme dizajn */
+.actions-grid button {
+  background: linear-gradient(90deg, #6c4eff, #8f70ff);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 14px;
+  padding: 18px 35px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(165, 124, 255, 0.2);
+}
+
+.actions-grid button:hover {
+  transform: translateY(-5px) scale(1.03);
+  background: linear-gradient(90deg, #ffd54f, #ffcc33);
+  color: #1a1625;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .actions-grid {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .actions-grid button {
+    width: 80%;
+  }
+}
+
+
+/******/
+/* 📊 Sekcija napretka */
+.stats-section {
+  text-align: center;
+  margin: 80px auto;
+  color: #fff;
+  width: 90%;
+}
+
+/* ✨ Naslov */
+.stats-section h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #c5a3ff;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(180, 100, 255, 0.6);
+  position: relative;
+}
+
+.stats-section h2::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 3px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, #6c4eff, #ffd54f);
+  border-radius: 2px;
+}
+
+/* 💎 Kartice */
+.stats-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+.stats-cards div {
+  background: linear-gradient(180deg, rgba(20, 20, 40, 0.95), rgba(35, 30, 60, 0.95));
+  border: 1px solid rgba(155, 120, 255, 0.3);
+  border-radius: 18px;
+  padding: 25px 45px;
+  color: #ffd54f;
+  font-size: 1.3rem;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(125, 76, 219, 0.2);
+  transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+}
+
+/* 🪄 Hover efekat */
+.stats-cards div:hover {
+  transform: translateY(-6px) scale(1.05);
+  background: linear-gradient(180deg, #6c4eff, #8f70ff);
+  color: #fff;
+  box-shadow: 0 0 30px rgba(165, 124, 255, 0.5);
+}
+
+/* 📱 Responsive izgled */
+@media (max-width: 768px) {
+  .stats-cards {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .stats-cards div {
+    width: 80%;
+    font-size: 1.1rem;
+  }
+}
+
