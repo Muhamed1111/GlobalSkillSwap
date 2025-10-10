@@ -1,0 +1,15 @@
+tr,td{
+    border: 2px solid rgb(0, 0, 0);
+    padding: 10px 20px;
+    text-align: center;
+    color: rgb(35, 30, 15);
+    text-shadow: 1px 1px 2px gold;
+}
+table{
+    border-collapse: collapse;
+}
+th{
+    background-color: grey;
+    
+    border: 2px solid rgb(0, 0, 0);
+}

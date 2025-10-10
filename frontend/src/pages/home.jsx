@@ -7,6 +7,22 @@ import Profile from "../pages/profile";
 import Contact from "../pages/contact";
 import Login from "./appwrite/login";
 import SignIn from "./appwrite/sign-in";
+import Button from "../components/Button";
+import Table from "../components/Table";
+import "../App.css"
+const user = {
+    name:"Muha",
+    lastName:"Mujic"
+}
+
+const head = ["Ime", "Prezime", "Bodovi"];
+const fields = ["name", "lastName", "points"];
+
+const data = [
+  { name: "Muhamed", lastName: "Mujić", points: 120 },
+  { name: "Ajdin", lastName: "Alihodžić", points: 95 },
+  { name: "Amar", lastName: "Hodžić", points: 180 },
+];
 
 const Home = () => {
   const location = useLocation();
@@ -23,6 +39,57 @@ const Home = () => {
 
   return (
     <div className="app">
+
+    {/*home content*/}
+    <div>
+        <h3>
+            👋 Dobrodošao nazad, Ajdine!
+Imaš trenutno 145 SkillPoints, što te svrstava među Top 10% mentora ove sedmice.
+Nastavi graditi svoj profil — tvoje znanje vrijedi!
+        </h3>
+<div>
+
+    <div>
+        Graf
+    </div>
+
+   
+    <section className="actions-grid">
+    <Button text="🧠 Offer lesson"/>
+    <Button text="🎯 Reserve lesson"/>
+    <Button text="💬 Job requests" /> 
+  </section>
+
+    <section className="stats-section">
+    <h2>Tvoj napredak</h2>
+    <div className="stats-cards">
+      <div>320 Bodova</div>
+      <div>8 Časova</div>
+      <div>Ocjena 4.9 ⭐</div>
+    </div>
+  </section>
+
+    
+    
+    {/* cards */}
+    
+        
+    
+    <Table title="Suggested mentors" 
+            head = {head}
+            fields = {fields}
+            array = {data}      
+            user = {user}/>
+    <Table title="Top mentors" 
+            head = {head}
+            fields = {fields}
+            array = {data}      
+            user = {user}/>
+
+</div>
+
+    </div>
+
       {/* Dugme za otvaranje/zatvaranje sidebar-a */}
       {!hideLayout && (
         <button
@@ -38,26 +105,7 @@ const Home = () => {
         <Sidebar active={sidebarOpen} onMenuToggle={toggleSidebar}  />
       )}
 
-      {/* Navigacija */}
-      {!hideLayout && (
-        <nav
-          style={{
-            padding: "10px",
-            margin: "10px",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "20px",
-          }}
-        >
-          <Link to="/about">About</Link>
-          <Link to="/skills">Skills</Link>
-          <Link to="/profile">Profile</Link>
-          <Link to="/appwrite/sign-in">Sign In</Link>
-          <Link to="/appwrite/login">Log In</Link>
-        </nav>
-      )}
+      
 
       {/* Rute */}
       <Routes>
@@ -67,14 +115,7 @@ const Home = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/appwrite/sign-in" element={<SignIn />} />
         <Route path="/appwrite/login" element={<Login />} />
-        <Route
-          path="*"
-          element={
-            <div style={{ textAlign: "center", marginTop: "40px" }}>
-              <h2>404 - Page Not Found</h2>
-            </div>
-          }
-        />
+       
       </Routes>
     </div>
   );
