@@ -1,12 +1,117 @@
-.menu-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.8rem;
-  cursor: pointer;
-  transition: 0.3s;
+/* ====== GLAVNI KONTEJNER ====== */
+.header {
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(90deg, #0f0f1a 0%, #1b1236 50%, #1c1240 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 70px;
+  position: fixed;
+  text-decoration: none;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+  box-sizing: border-box;
 }
 
-.menu-btn:hover {
-  color: #4ea3ff;
+/* ====== LOGO ====== */
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #b197fc; /* svijetlo-ljubičasta */
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+/* ====== TOP MENU ====== */
+.top-menu {
+  display: flex;
+  gap: 25px;
+  margin-left: 50px;
+}
+
+.top-menu a {
+  color: #d1cce6;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.top-menu a:hover {
+  color: #9d7cff;
+}
+
+/* ====== DESNA STRANA ====== */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ====== NAVIGACIJSKA DUGMAD ====== */
+.nav-btn {
+  background: transparent;
+  border: 1px solid rgba(138, 43, 226, 0.4);
+  color: #b197fc;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-btn:hover {
+  background-color: rgba(138, 43, 226, 0.2);
+  color: #ffffff;
+  border-color: #8a2be2;
+}
+
+/* ====== REGISTER DUGME ====== */
+.get-started-btn {
+  background-color: #7c3aed;
+  color: #ffffff;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+}
+
+.get-started-btn:hover {
+  background-color: #9d7cff;
+  box-shadow: 0 0 20px rgba(157, 124, 255, 0.6);
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 1024px) {
+  .top-menu {
+    display: none;
+  }
+
+  .header {
+    padding: 0 30px;
+  }
+}
+
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-link {
+  color: #b9a5ff;
+  text-decoration: none;
+}
+.top-menu a.active-link {
+  color: #b28fff;
+  font-weight: 600;
+  border-bottom: 2px solid #b28fff;
+  padding-bottom: 3px;
 }

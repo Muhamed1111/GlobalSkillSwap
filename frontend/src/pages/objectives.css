@@ -1,0 +1,61 @@
+.page-container {
+  padding: 3rem;
+  color: #f1f1f1;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-desc {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  color: #cfcfcf;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.objective-card {
+  background: linear-gradient(180deg, #1d1930 0%, #111 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(80, 60, 180, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 340px;
+}
+
+.objective-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(130, 90, 255, 0.6);
+}
+
+.objective-img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.objective-content {
+  padding: 1.2rem;
+  text-align: left;
+}
+
+.objective-content h2 {
+  font-size: 1.3rem;
+  color: #cdbbff;
+}
+
+.objective-content p {
+  color: #bbb;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
