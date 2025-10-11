@@ -569,3 +569,24 @@ button:hover {
   }
 }
 
+/*LogOut btn*/
+
+.logout-btn {
+  text-decoration: none;   /* uklanja liniju */
+  color: #fff;             /* boja teksta */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #ff4b2b, #ff416c);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 65, 108, 0.4);
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(255, 65, 108, 0.7);
+  text-decoration: none;   /* osigurava i u hoveru */
+}

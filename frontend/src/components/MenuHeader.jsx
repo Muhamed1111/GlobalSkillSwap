@@ -40,9 +40,10 @@ const MenuHeader = () => {
       </Link>
 
       {/* 🚪 Logout */}
-      <button className="logout-btn">
-        <i className="fas fa-sign-out-alt"></i> Logout
-      </button>
+      <Link to="/" className="logout-btn">
+        <i className="fas fa-sign-out-alt" to="/"></i> Log Out
+      </Link>
+
 </div>
     </header>
   );

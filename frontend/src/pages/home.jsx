@@ -45,7 +45,7 @@ const Home = () => {
     <div className="app">
         <MenuHeader />
       {/*home content*/}
-      <div>
+      <div style={{ marginTop: "80px" }}>
         <div
           style={{
             //background: "linear-gradient(90deg, rgba(40,40,40,0.9), rgba(0,0,0,0.95))",

@@ -12,7 +12,7 @@ import Post from "./pages/post";
 import Button from "./components/Button";
 
 const App = () => {
-  const [color, setColor] = useState("white");
+  const [color, setColor] = useState("#1e1e2f");
   const location = useLocation();
 
   // 🔹 Stranice gdje se NE prikazuje header
