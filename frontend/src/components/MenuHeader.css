@@ -1,0 +1,280 @@
+/* 🌟 Glavni header */
+.menu-header {
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(90deg, #0f0f1a 0%, #1b1236 50%, #1c1240 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px; /* više prostora desno/lijevo */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+  backdrop-filter: blur(6px);
+  flex-wrap: wrap; /* omogućava prelamanje dugmadi */
+  box-sizing: border-box;
+}
+
+/* 🔸 Logo sekcija */
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #b197fc;
+  margin-left: 40px;
+}
+
+.logo-link {
+  color: #b9a5ff;
+  text-decoration: none;
+}
+
+.gold-text {
+  color: #ffd54f;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+/* 🔹 Lijeva strana (logo + meni linkovi) */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* 🔸 Gornji meni (About, Skills, itd.) */
+.top-menu {
+  display: flex;
+  justify-content: center;  /* ⬅️ centrira linkove horizontalno */
+  align-items: center;       /* ⬅️ vertikalno centriranje */
+  gap: 25px;
+  flex-wrap: wrap;
+  flex: 1;                   /* ⬅️ zauzima sav prostor između logoa i desnog dijela */
+  text-align: center;
+}
+
+
+.top-menu a {
+  color: #d1cce6;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  padding-bottom: 3px;
+}
+
+.top-menu a:hover {
+  color: #9d7cff;
+}
+
+.top-menu a.active-link {
+  color: #b28fff;
+  font-weight: 600;
+  border-bottom: 2px solid #b28fff;
+}
+
+/* 🔸 Desna strana (Home / Sign In / Register) */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 45%;
+}
+
+/* 🟪 Dugmad za navigaciju */
+.nav-btn {
+  background: transparent;
+  border: 1px solid rgba(138, 43, 226, 0.4);
+  color: #b197fc;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-btn:hover {
+  background-color: rgba(138, 43, 226, 0.25);
+  color: #ffffff;
+  border-color: #8a2be2;
+  box-shadow: 0 0 8px rgba(157, 124, 255, 0.3);
+}
+
+/* 💜 Register dugme */
+.get-started-btn {
+  background-color: #7c3aed;
+  color: #ffffff;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+  white-space: nowrap;
+}
+
+.get-started-btn:hover {
+  background-color: #9d7cff;
+  box-shadow: 0 0 20px rgba(157, 124, 255, 0.6);
+}
+
+/* 📱 Responsive dizajn */
+@media (max-width: 1280px) {
+  .menu-header {
+    padding: 0 30px;
+  }
+
+  .header-right {
+    gap: 8px;
+    max-width: 50%;
+  }
+
+  .nav-btn,
+  .get-started-btn {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .top-menu a {
+    font-size: 0.9rem;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .menu-header {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 10px 20px;
+  }
+
+ .header-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* ⬅️ centrira cijeli blok s linkovima */
+  width: 100%;
+}
+
+
+  .top-menu {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .header-right {
+    justify-content: center;
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+/* 🧭 Hover efekti i prijelazi */
+.menu-header a {
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+/* 🔆 Efekat svjetlosne linije pri dnu headera */
+.menu-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #ffd54f, #8f70ff);
+  box-shadow: 0 0 10px rgba(157, 124, 255, 0.6);
+}
+
+
+/* 🔹 Header desna strana */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 45%;
+}
+
+/* 🔔 Notifikacijska ikona */
+.notification-icon {
+  position: relative;
+  font-size: 1.3rem;
+  color: #ffd54f;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.notification-icon:hover {
+  transform: scale(1.1);
+  color: #fff389;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* 🟡 Badge za broj notifikacija */
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: #ff4f4f;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 0, 0, 0.4);
+}
+
+/* 👤 Profil dugme */
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(138, 43, 226, 0.4);
+  color: #b197fc;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.profile-btn:hover {
+  background: rgba(138, 43, 226, 0.2);
+  color: #ffffff;
+  border-color: #8a2be2;
+  box-shadow: 0 0 10px rgba(157, 124, 255, 0.4);
+}
+
+/* 🚪 Logout dugme */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(90deg, #ff6b6b, #ff4757);
+  color: white;
+  padding: 7px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 99, 99, 0.4);
+}
+
+.logout-btn:hover {
+  background: linear-gradient(90deg, #ff7e7e, #ff5252);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 100, 100, 0.6);
+}
