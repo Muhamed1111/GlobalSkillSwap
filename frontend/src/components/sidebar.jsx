@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
-import "../pages/appwrite/signIn.css"
+import "../pages/appwrite/signIn.css";
+
 const Sidebar = ({ active, onMenuToggle }) => {
   return (
     <div className={`sidebar ${active ? "active" : "hidden"}`}>
@@ -13,7 +14,9 @@ const Sidebar = ({ active, onMenuToggle }) => {
         <Link to="/post" onClick={onMenuToggle}>📝 Post Job</Link>
         <Link to="/my-jobs" onClick={onMenuToggle}>My Jobs</Link>
         <Link to="/messanger" onClick={onMenuToggle}>Messenger</Link>
+
         <Link className="bottom-link" to="/">Log Out</Link>
+        
         
       </nav>
     </div>

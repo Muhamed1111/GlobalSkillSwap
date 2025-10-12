@@ -60,5 +60,5 @@ import "./ProfileModal.css";
     </>
   );
 };
-
 export default ProfileModal;
+

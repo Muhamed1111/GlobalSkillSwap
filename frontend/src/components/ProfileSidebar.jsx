@@ -50,5 +50,5 @@ const ProfileSidebar = ({ active, onClose }) => {
     </div>
   );
 };
-
 export default ProfileSidebar;
+

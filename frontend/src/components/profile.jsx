@@ -35,3 +35,4 @@ const ProfileCard = ({ user, onChatOpen }) => {
 };
 
 export default ProfileCard;
+

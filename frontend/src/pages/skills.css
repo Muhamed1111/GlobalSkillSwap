@@ -68,12 +68,12 @@
 
 .profiles-carousel {
   display: flex;
-  margin: 20px 20px 20px 20px;
   gap: 25px;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
-  width: 1000px; /* 👈 prikazuje 3 kartice po ekranu */
+
+  width: 1100px; /* 👈 prikazuje 3 kartice po ekranu */
 }
 
 .profiles-carousel::-webkit-scrollbar {
@@ -144,3 +144,4 @@
   cursor: pointer;
   color: #222;
 }
+
