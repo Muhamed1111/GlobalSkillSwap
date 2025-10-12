@@ -15,6 +15,7 @@ import HowItWorks from "./pages/howItWorks";
 import Pricing from "./pages/pricing";
 import Resources from "./pages/resources";
 import Contact from "./pages/contact";
+import MainLayout from "./layouts/MainLayout";
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -114,16 +115,20 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/post" element={<Post />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
         <Route path="/objectives" element={<Objectives />} />
         <Route path="/industries" element={<Industries />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/contact" element={<Contact />} />
+        
 
       </Routes>
     </div>

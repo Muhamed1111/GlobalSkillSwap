@@ -13,18 +13,17 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus("sending");
-
-    emailjs
-      .send(
-        "service_db6kzx5", // ✅ tvoj Service ID
-        "template_contactus", // ✅ tvoj Template ID
-        {
-          from_name: form.name,
-          from_email: form.email,
-          message: form.message,
-        },
-        "kr4wFcWA9SQJQIkG1" // ✅ tvoj Public Key
-      )
+emailjs
+  .send(
+    "service_db6kzx5",       // tvoj Service ID
+    "template_zb0dqed",    // tvoj Template ID
+    {
+      from_name: form.name,
+      from_email: form.email,
+      message: form.message,
+    },
+    "kr4wFcWA9SqJQIkG1"      // Public Key — bez razmaka!
+  )
       .then(
         () => {
           setStatus("success");
@@ -111,8 +110,8 @@ const Contact = () => {
         </p>
         <p>
           <strong>Partner:</strong>{" "}
-          <a href="mailto:ajdin227@gmail.com" className="contact-link">
-            ajdin227@gmail.com
+          <a href="mailto:ajdin227227@gmail.com" className="contact-link">
+            ajdin227227@gmail.com
           </a>
         </p>
       </div>
