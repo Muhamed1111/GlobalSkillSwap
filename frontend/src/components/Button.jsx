@@ -10,12 +10,14 @@ const Button = ({
   textColor = "white",
   hoverColor = "#0056b3",
   transition = "0.3s ease",
+  onClick
   
 }) => {
   const [isHovered, setIsHovered] = useState(false);
  
   return (
     <button
+       onClick={onClick}
       style={{
         backgroundColor: isHovered ? hoverColor : color,
         padding: padding,
@@ -30,6 +32,7 @@ const Button = ({
       
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      
     >
       {text}
     </button>

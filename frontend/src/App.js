@@ -1,21 +1,26 @@
 import React, { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, Link } from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./pages/appwrite/login";
 import SignIn from "./pages/appwrite/sign-in";
-import "./App.css";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Skills from "./pages/skills";
-import Profile from "./pages/profile";
+import Profile from "./components/ProfileModal.jsx";
 import Post from "./pages/post";
-import Button from "./components/Button";
-
+import "./App.css";
+import Objectives from "./pages/objectives";
+import Industries from "./pages/industries";
+import HowItWorks from "./pages/howItWorks";
+import Pricing from "./pages/pricing";
+import Resources from "./pages/resources";
+import Contact from "./pages/contact";
 const App = () => {
-  const [color, setColor] = useState("#1e1e2f");
   const location = useLocation();
+  const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(true);
 
-  // 🔹 Stranice gdje se NE prikazuje header
+  // Stranice bez headera
   const hideHeader =
     location.pathname === "/login" ||
     location.pathname === "/sign-in" ||
@@ -25,47 +30,87 @@ const App = () => {
     location.pathname === "/post" ||
     location.pathname === "/profile";
 
-  // 🔹 Promjena teme
-  const toDarkTheme = () => {
-    document.body.style.backgroundColor = "#1e1e2f";
-    setColor("#1e1e2f");
-  };
-
-  const toLightTheme = () => {
-    document.body.style.backgroundColor = "white";
-    setColor("white");
-  };
+  const toggleTheme = () => setDarkMode(!darkMode);
 
   return (
-    <div className="app" style={{ backgroundColor: color, minHeight: "100vh" }}>
+    <div
+      className={`app-container ${darkMode ? "dark-theme" : "light-theme"}`}
+    >
       {!hideHeader && (
         <Header
           title="Global Skill Swap"
           font="italic"
           size="2.5rem"
-          color="#FFD700"
+          color="blue"
         />
       )}
-  
+
       <Routes>
+        {/* 🌍 Landing Page */}
         <Route
           path="/"
           element={
-            <main className="main-content">
-              <div className="content-box">
-                <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
-                  
+            <main className="landing-page">
+              <nav className="top-nav">
+                <div className="logo">GlobalSkillSwap</div>
+                <div className="nav-links">
+                  <Link to="/about">About</Link>
+                  <Link to="/skills">Skills</Link>
+                  <Link to="/login">Login</Link>
+                  <Link to="/sign-in" className="get-started-btn">
+                    Get Started
+                  </Link>
                 </div>
-                <h2>Welcome to Global Skill Swap</h2>
-                <p>
-                  Discover and exchange skills worldwide. Connect, learn, and
-                  grow together in a global network of passionate learners.
-                </p>
-                <button className="action-btn">Explore Now</button>
-              </div>
+              </nav>
+
+              <section className="hero-section">
+                <div className="hero-text">
+                  <p className="hero-sub">The future of skill exchange</p>
+                  <h1 className="gradient-text">
+                    Accelerate Your{" "}
+                    <span className="gradient-text">Learning Journey</span>
+                  </h1>
+                  <p className="hero-desc">
+                    Exchange knowledge, earn SkillPoints, and grow with others.
+                    Build your network through teaching and learning — powered by
+                    community collaboration.
+                  </p>
+                  <div className="cta-buttons">
+                    <button
+                      onClick={() => navigate("/sign-in")}
+                      className="primary-btn"
+                    >
+                      Join Now
+                    </button>
+                    <button
+                      onClick={() => navigate("/login")}
+                      className="secondary-btn"
+                    >
+                      Log In
+                    </button>
+                  </div>
+                </div>
+
+                <div className="floating-elements">
+                  <div className="bubble mentor"><span>🧠 Mentor</span></div>
+                  <div className="bubble ai"><span>🤖 AI Match</span></div>
+                  <div className="bubble learner"><span>🎓 Learner</span></div>
+                  <div className="bubble network"><span>🌍 Network</span></div>
+                </div>
+
+              </section>
+
+              <footer className="landing-footer">
+                <p>© 2025 GlobalSkillSwap | Built for knowledge sharing</p>
+                <button onClick={toggleTheme} className="theme-toggle">
+                  {darkMode ? "☀️ Light" : "🌙 Dark"}
+                </button>
+              </footer>
             </main>
           }
         />
+
+        {/* 📄 Ostale rute */}
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-in" element={<SignIn />} />
@@ -73,8 +118,14 @@ const App = () => {
         <Route path="/skills" element={<Skills />} />
         <Route path="/post" element={<Post />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/objectives" element={<Objectives />} />
+        <Route path="/industries" element={<Industries />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/contact" element={<Contact />} />
+
       </Routes>
-      
     </div>
   );
 };

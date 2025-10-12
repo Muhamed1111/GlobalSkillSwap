@@ -1,35 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "../App.css";
-import "./Header.css"
-const Header = ({ title, font, size, color }) => {
+import { Link, useLocation } from "react-router-dom";
+import "./Header.css";
+
+const Header = () => {
+  const location = useLocation();
+
+  const isActive = (path) => (location.pathname === path ? "active-link" : "");
+
   return (
-    <header
-      className="header"
-      style={{
-        fontStyle: font,
-        fontSize: size,
-        background:
-          "linear-gradient(90deg, #3c300dff 20%, #514f03ff 60%, #988e34ff 100%)",
-        color: color || "#FFD700",
-      }}
-    >
-        
+    <header className="header">
       <div className="header-left">
-        <h1 className="header-title">{title}</h1>
+        <h1 className="logo">
+          <Link to="/" className="logo-link">
+            GlobalSkillSwap
+          </Link>
+        </h1>
+
+        <nav className="top-menu">
+          <Link to="/objectives" className={isActive("/objectives")}>Objectives</Link>
+          <Link to="/industries" className={isActive("/industries")}>Industries</Link>
+          <Link to="/how-it-works" className={isActive("/how-it-works")}>How it Works</Link>
+          <Link to="/pricing" className={isActive("/pricing")}>Pricing</Link>
+          <Link to="/resources" className={isActive("/resources")}>Resources</Link>
+          <Link to="/contact" className={isActive("/contact")}>Contact</Link>
+        </nav>
       </div>
 
       <div className="header-right">
-        <Link to="/home">
-         <button className="login-btn">Home</button>
-        </Link>
-        <Link to="/login">
-          <button className="login-btn">Sign In</button>
-        </Link>
-
-        <Link to="/register">
-          <button className="register-btn">Register</button>
-        </Link>
+        <Link to="/home" className={`nav-btn ${isActive("/home")}`}>Home</Link>
+        <Link to="/login" className={`nav-btn ${isActive("/login")}`}>Sign In</Link>
+        <Link to="/sign-in" className={`get-started-btn ${isActive("/sign-in")}`}>Register</Link>
       </div>
     </header>
   );

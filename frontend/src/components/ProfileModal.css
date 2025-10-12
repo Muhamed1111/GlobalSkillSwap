@@ -1,0 +1,154 @@
+/* Pozadinski overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Glavni modal */
+.modal-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(180deg, #1a1333, #0f0f1a);
+  border: 1px solid rgba(155, 120, 255, 0.4);
+  border-radius: 20px;
+  padding: 25px 35px;
+  width: 550px;
+  color: white;
+  z-index: 100;
+  box-shadow: 0 0 25px rgba(125, 76, 219, 0.3);
+  animation: scaleIn 0.25s ease forwards;
+}
+
+.profile-modal {
+  position: absolute;
+  margin-top: 50px;
+  top: 90px; /* 🔹 gura modal ispod headera */
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #141432, #1b1932);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(125, 76, 219, 0.25);
+  padding: 25px 40px;
+  width: 700px;
+  color: white;
+  z-index: 2000;
+  transition: all 0.3s ease;
+}
+
+
+.modal-card.small {
+  width: 400px;
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: transparent;
+  color: #bbb;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #fff;
+}
+
+/* Tijelo modala */
+.modal-body {
+  margin-top: 15px;
+}
+
+.modal-profile {
+  display: flex;
+  gap: 20px;
+}
+
+.modal-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 3px solid #ffd54f;
+  object-fit: cover;
+}
+
+.modal-info h3 {
+  color: #c5a3ff;
+  margin-bottom: 10px;
+}
+
+.modal-info p {
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+.modal-stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.modal-stats div {
+  text-align: center;
+}
+
+.modal-stats b {
+  color: #ffd54f;
+  display: block;
+  font-size: 1.1rem;
+}
+
+/* Dugmad */
+.edit-btn,
+.save-btn {
+  background: linear-gradient(90deg, #6c4eff, #8f70ff);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover,
+.save-btn:hover {
+  background: linear-gradient(90deg, #ffd54f, #ffcc33);
+  color: #1a1625;
+}
+
+/* Edit form */
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(155, 120, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding: 8px 10px;
+  font-family: inherit;
+}
+
+/* Animacije */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: translate(-50%, -50%) scale(0.95); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}

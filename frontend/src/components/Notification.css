@@ -1,0 +1,114 @@
+/* 🪟 Glavni prozor notifikacija */
+.notification-window {
+  position: fixed;
+  top: 90px;
+  right: 40px;
+  width: 340px;
+  max-height: 500px;
+  background: rgba(25, 20, 60, 0.95);
+  border: 1px solid rgba(155, 120, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(155, 120, 255, 0.25);
+  overflow: hidden;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px);
+  color: white;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ✨ Animacija ulaska */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🔹 Header sekcija */
+.notification-header {
+  padding: 15px 20px;
+  background: linear-gradient(90deg, #6c4eff, #8f70ff);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.notification-header span {
+  color: #ffd54f;
+}
+
+/* 🔸 Telo sa listom notifikacija */
+.not-body {
+  padding: 10px 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 📩 Jedna notifikacija */
+.notification-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(155, 120, 255, 0.1);
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background: rgba(155, 120, 255, 0.1);
+}
+
+/* 🔔 Nepročitane notifikacije */
+.notification-item.unread {
+  background: rgba(255, 215, 0, 0.08);
+  border-left: 4px solid #ffd54f;
+}
+
+/* 🕒 Vrijeme notifikacije */
+.notification-time {
+  font-size: 0.8rem;
+  color: #aaa;
+  align-self: flex-end;
+}
+
+/* 💬 Tekst notifikacije */
+.notification-text {
+  font-size: 0.95rem;
+  color: #eee;
+  line-height: 1.4;
+}
+
+/* 🔗 Link na profil ili chat */
+.notification-link {
+  color: #ffd54f;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.notification-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* 📱 Scrollbar */
+.not-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.not-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6c4eff, #8f70ff);
+  border-radius: 3px;
+}

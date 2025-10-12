@@ -11,8 +11,8 @@ const Sidebar = ({ active, onMenuToggle }) => {
         <Link to="/home" onClick={onMenuToggle}>🏠 Home</Link>
         <Link to="/how" onClick={onMenuToggle}>⚙️ How it Works</Link>
         <Link to="/about" onClick={onMenuToggle}>ℹ️ About</Link>
-        <Link to="/skills" onClick={onMenuToggle}>💡 Skills</Link>
-        <Link to="/post" onClick={onMenuToggle}>📝 Post</Link>
+        <Link to="/skills" onClick={onMenuToggle}>💡 Find Job</Link>
+        <Link to="/post" onClick={onMenuToggle}>📝 Post Job</Link>
         <Link to="/profile" onClick={onMenuToggle}>👤 Profile</Link>
 
        

@@ -1,0 +1,71 @@
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  margin-top: 2.5rem;
+}
+
+.pricing-card {
+  background: linear-gradient(180deg, #18122b 0%, #0f0b1f 100%);
+  border-radius: 16px;
+  padding: 2rem 1.6rem;
+  color: #f5f5f5;
+  width: 100%;
+  max-width: 340px;
+  text-align: left;
+  transition: all 0.4s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 30px rgba(160, 120, 255, 0.4);
+}
+
+.pricing-card h2 {
+  font-size: 1.5rem;
+  color: #cdbbff;
+  margin-bottom: 0.4rem;
+}
+
+.pricing-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+.plan-tagline {
+  font-size: 0.95rem;
+  color: #b8a8ff;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.6rem;
+}
+
+.pricing-card li {
+  margin-bottom: 0.6rem;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+}
+
+.primary-btn {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}

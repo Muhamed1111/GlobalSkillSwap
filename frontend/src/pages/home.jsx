@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Routes, Route, Link, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import About from "../pages/about";
 import Skills from "../pages/skills";
-import Profile from "../pages/profile";
+import Profile from "../components/ProfileModal";
 import Contact from "../pages/contact";
 import Login from "./appwrite/login";
 import SignIn from "./appwrite/sign-in";
@@ -12,6 +12,7 @@ import Table from "../components/Table";
 import Chart from "../components/Chart";
 import "../App.css"
 import MenuHeader from "../components/MenuHeader";
+import ProfileSidebar from "../components/ProfileSidebar";
 
 
 const user = {
@@ -31,6 +32,9 @@ const data = [
 const Home = () => {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const navigate = useNavigate();
+
 
   // Stranice gdje se ne prikazuje sidebar
   const hideLayout =
@@ -41,9 +45,14 @@ const Home = () => {
     setSidebarOpen((prev) => !prev);
   };
 
+   const toggleProfile = () => {
+    setProfileOpen((prev) => !prev);
+  };
+
   return (
     <div className="app">
-        <MenuHeader />
+        <MenuHeader onProfileToggle={() => setProfileOpen(true)} />
+
       {/*home content*/}
       <div style={{ marginTop: "80px" }}>
         <div
@@ -73,11 +82,17 @@ const Home = () => {
             <Chart>Graf</Chart>
           </div>
 
-    <section className="actions-section">
+<section className="actions-section">
       <h2 className="actions-title">Šta želiš danas uraditi?</h2>
       <div className="actions-grid">
-        <Button text="🧠 Offer lesson" />
-        <Button text="🎯 Reserve lesson" />
+        <Button 
+          text="🧠 Offer lesson"
+          onClick={()=>navigate("/post")}
+          />
+        <Button
+          text="🎯 Reserve lesson"
+          onClick={() => navigate("/skills")} 
+        />
         <Button text="💬 Job requests" />
       </div>
     </section>
@@ -128,7 +143,14 @@ const Home = () => {
       {!hideLayout && (
         <Sidebar active={sidebarOpen} onMenuToggle={toggleSidebar} />
       )}
-
+      
+ {profileOpen && (
+  <ProfileSidebar
+    active={profileOpen}
+    onClose={() => setProfileOpen(false)}
+  />
+)}
+     
 
 
       {/* Rute */}
