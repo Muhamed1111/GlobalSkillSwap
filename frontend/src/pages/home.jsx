@@ -10,6 +10,9 @@ import SignIn from "./appwrite/sign-in";
 import Table from "../components/Table";
 import Chart from "../components/Chart";
 import Button from "../components/Button";
+import { JobProvider } from "../context/JobContext";
+import Post from "./post";
+import MyJobs from "./MyJobs";
 
 const user = { name: "Muha", lastName: "Mujic" };
 const head = ["Ime", "Prezime", "Bodovi"];
@@ -36,6 +39,7 @@ const Home = () => {
 
   // 🌟 Sve ostalo ide kroz glavni layout
   return (
+    <JobProvider>
     <Routes>
       <Route element={<MainLayout />}>
         <Route
@@ -100,8 +104,11 @@ const Home = () => {
         <Route path="/skills" element={<Skills />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/post" element={<Post/>}/>
+        <Route path="/my-jobs" element={<MyJobs/>}/>
       </Route>
     </Routes>
+    </JobProvider>
   );
 };
 

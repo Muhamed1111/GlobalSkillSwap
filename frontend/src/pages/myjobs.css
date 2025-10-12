@@ -1,0 +1,31 @@
+.my-jobs-wrapper {
+  padding: 40px;
+  color: white;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ffd700, #a17cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.empty-text {
+  text-align: center;
+  color: #bbb;
+}
+
+.my-jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.my-job-card {
+  background: linear-gradient(160deg, #150b3e, #2c1f74);
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+}
