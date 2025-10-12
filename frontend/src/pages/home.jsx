@@ -13,6 +13,7 @@ import Chart from "../components/Chart";
 import "../App.css"
 import MenuHeader from "../components/MenuHeader";
 import ProfileSidebar from "../components/ProfileSidebar";
+import Chat from "./Chat";
 
 
 const user = {
@@ -31,7 +32,7 @@ const data = [
 
 const Home = () => {
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -161,7 +162,7 @@ const Home = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/appwrite/sign-in" element={<SignIn />} />
         <Route path="/appwrite/login" element={<Login />} />
-
+        <Route path="/chat" element={<Chat/>}/>
       </Routes>
     </div>
   );

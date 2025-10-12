@@ -57,3 +57,19 @@
   font-size: 0.8rem;
   margin: 0;
 }
+
+.chat-btn {
+  background-color: #ffd700;
+  color: #222;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.chat-btn:hover {
+  background-color: #ffb700;
+}

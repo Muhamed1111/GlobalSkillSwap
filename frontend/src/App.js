@@ -15,6 +15,8 @@ import HowItWorks from "./pages/howItWorks";
 import Pricing from "./pages/pricing";
 import Resources from "./pages/resources";
 import Contact from "./pages/contact";
+import Chat from "./pages/Chat.jsx";
+
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,7 +30,8 @@ const App = () => {
     location.pathname === "/about" ||
     location.pathname === "/skills" ||
     location.pathname === "/post" ||
-    location.pathname === "/profile";
+    location.pathname === "/profile"||
+    location.pathname === "/chat";
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
@@ -124,6 +127,7 @@ const App = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/chat" element={<Chat />} />
 
       </Routes>
     </div>

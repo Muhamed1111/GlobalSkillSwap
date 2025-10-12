@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EditProfileModal from "./EditProfileModal";
 import "./ProfileModal.css";
 
-const ProfileModal = ({ onClose }) => {
+  const ProfileModal = ({ onClose, onChatOpen }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const user = {
@@ -34,6 +34,9 @@ const ProfileModal = ({ onClose }) => {
                 <div><b>{user.points}</b><span>Bodova</span></div>
                 <div><b>{user.lessons}</b><span>Časova</span></div>
                 <div><b>{user.rating} ⭐</b><span>Ocjena</span></div>
+                <button className="chat-btn" onClick={() => onChatOpen(user)}>
+                  💬 Chat
+                </button>
               </div>
             </div>
           </div>

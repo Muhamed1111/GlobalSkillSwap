@@ -1,7 +1,7 @@
 import React from "react";
 import "./profile.css";
 
-const ProfileCard = ({ user }) => {
+const ProfileCard = ({ user, onChatOpen }) => {
   return (
     <div className="mentor-card">
       <img src={user.avatar} alt={user.name} className="mentor-avatar" />
@@ -22,6 +22,14 @@ const ProfileCard = ({ user }) => {
           <p>Rating</p>
         </div>
       </div>
+
+      {/* 💬 Dugme za otvaranje chat prozora */}
+      <button
+        className="chat-btn"
+        onClick={() => onChatOpen(user)}
+      >
+        💬 Chat
+      </button>
     </div>
   );
 };

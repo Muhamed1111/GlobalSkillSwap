@@ -4,15 +4,19 @@ import Sidebar from "../components/sidebar";
 import ProfileSidebar from "../components/ProfileSidebar";
 import ProfileCard from "../components/profile";
 import "./skills.css";
+import Chat from "./Chat";
+
 
 const Skills = () => {
   const scrollRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [activeChatUser, setActiveChatUser] = useState(null);
 
   // 🔹 Dummy podaci
   const users = [
     {
+      id:568,
       name: "Ajdin Alihodžić",
       email: "ajdin@example.com",
       points: 320,
@@ -22,6 +26,7 @@ const Skills = () => {
       avatar: "https://i.pravatar.cc/200?img=3",
     },
     {
+      id:565,
       name: "Muhamed Mujić",
       email: "mujic@example.com",
       points: 652,
@@ -31,6 +36,7 @@ const Skills = () => {
       avatar: "https://i.pravatar.cc/200?img=4",
     },
     {
+      id: 156,
       name: "Zemo Mujić",
       email: "zemo@example.com",
       points: 54,
@@ -40,6 +46,7 @@ const Skills = () => {
       avatar: "https://i.pravatar.cc/200?img=5",
     },
     {
+      id:123,
       name: "Emina Hadžić",
       email: "emina@example.com",
       points: 415,
@@ -98,12 +105,24 @@ const Skills = () => {
           <button className="carousel-btn left" onClick={scrollLeft}>◀</button>
           <div className="profiles-carousel" ref={scrollRef}>
             {users.map((user, index) => (
-              <ProfileCard key={index} user={user} />
-            ))}
+  <ProfileCard key={index} user={user} onChatOpen={setActiveChatUser} />
+))}
+
           </div>
           <button className="carousel-btn right" onClick={scrollRight}>▶</button>
         </div>
       </div>
+
+
+          {activeChatUser && (
+        <div className="chat-popup">
+          <div className="chat-popup-header">
+            <h3>Chat with {activeChatUser.name}</h3>
+            <button onClick={() => setActiveChatUser(null)}>✖</button>
+          </div>
+          <Chat recipient={activeChatUser.name} />
+        </div>
+      )}
 
       {/* Dugme za otvaranje sidebar-a */}
       <button onClick={toggleSidebar} className="menu-toggle-btn">☰</button>

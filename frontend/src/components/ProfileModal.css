@@ -152,3 +152,19 @@
   from { transform: translate(-50%, -50%) scale(0.95); opacity: 0; }
   to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
+
+.chat-btn {
+  background-color: #ffd700;
+  color: #222;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.chat-btn:hover {
+  background-color: #ffb700;
+}
