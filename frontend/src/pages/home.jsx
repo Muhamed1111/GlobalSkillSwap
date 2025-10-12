@@ -1,9 +1,9 @@
-import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation ,useNavigate} from "react-router-dom";
+import React, { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import About from "../pages/about";
 import Skills from "../pages/skills";
-import Profile from "../pages/profile";
+import Profile from "../components/profile";
 import Contact from "../pages/contact";
 import Login from "./appwrite/login";
 import SignIn from "./appwrite/sign-in";
@@ -13,6 +13,8 @@ import Button from "../components/Button";
 import { JobProvider } from "../context/JobContext";
 import Post from "./post";
 import MyJobs from "./MyJobs";
+import Chat from "./Chat";
+import ProfileSidebar from "../components/ProfileSidebar";
 
 const user = { name: "Muha", lastName: "Mujic" };
 const head = ["Ime", "Prezime", "Bodovi"];
@@ -36,6 +38,7 @@ const Home = () => {
       </Routes>
     );
   }
+   
 
   // 🌟 Sve ostalo ide kroz glavni layout
   return (
@@ -102,7 +105,6 @@ const Home = () => {
         />
         <Route path="/about" element={<About />} />
         <Route path="/skills" element={<Skills />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/post" element={<Post/>}/>
         <Route path="/my-jobs" element={<MyJobs/>}/>

@@ -9,13 +9,10 @@ const Sidebar = ({ active, onMenuToggle }) => {
 
       <nav className="sidebar-nav">
         <Link to="/home" onClick={onMenuToggle}>🏠 Home</Link>
-        <Link to="/how" onClick={onMenuToggle}>⚙️ How it Works</Link>
-        <Link to="/about" onClick={onMenuToggle}>ℹ️ About</Link>
-        <Link to="/skills" onClick={onMenuToggle}>💡 Skills</Link>
-        <Link to="/post" onClick={onMenuToggle}>📝 Post</Link>
-        <Link to="/profile" onClick={onMenuToggle}>👤 Profile</Link>
+        <Link to="/skills" onClick={onMenuToggle}>💡 Find Jobs</Link>
+        <Link to="/post" onClick={onMenuToggle}>📝 Post Job</Link>
         <Link to="/my-jobs" onClick={onMenuToggle}>My Jobs</Link>
-       
+        <Link to="/messanger" onClick={onMenuToggle}>Messenger</Link>
         <Link className="bottom-link" to="/">Log Out</Link>
         
       </nav>

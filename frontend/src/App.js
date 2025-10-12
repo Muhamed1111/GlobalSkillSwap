@@ -6,7 +6,6 @@ import SignIn from "./pages/appwrite/sign-in";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Skills from "./pages/skills";
-import Profile from "./pages/profile";
 import Post from "./pages/post";
 import "./App.css";
 import Objectives from "./pages/objectives";
@@ -18,6 +17,8 @@ import Contact from "./pages/contact";
 import MainLayout from "./layouts/MainLayout";
 import { JobProvider } from "./context/JobContext";
 import MyJobs from "./pages/MyJobs";
+import Chat from "./pages/Chat.jsx";
+
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ const App = () => {
     location.pathname === "/home" ||
     location.pathname === "/about" ||
     location.pathname === "/skills" ||
-    location.pathname === "/post" ||
-    location.pathname === "/profile";
+    location.pathname === "/post" 
+    ||location.pathname === "/chat";
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
@@ -121,7 +122,6 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/skills" element={<Skills />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/post" element={<Post />} />
 
@@ -133,6 +133,7 @@ const App = () => {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/chat" element={<Chat />} />
 
 
         </Routes>
