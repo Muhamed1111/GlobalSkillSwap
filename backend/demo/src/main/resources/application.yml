@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://sql6031.site4now.net:1433;databaseName=db_abf652_gss;encrypt=false;trustServerCertificate=true;
+    username: db_abf652_gss_admin
+    password: AJDINAJDIN123!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.SQLServerDialect
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: "mysecretkey1234567890abcdefghijklmnopqrstuvwxyz"
+    expires-in-seconds: 604800
+
