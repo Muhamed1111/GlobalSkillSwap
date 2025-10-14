@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Routes, Route, useLocation, useNavigate, Link } from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./pages/appwrite/login";
-import SignIn from "./pages/appwrite/sign-in";
+import SignUp from "./pages/appwrite/sign-up";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Skills from "./pages/skills";
 import Post from "./pages/post";
-import "./App.css";
 import Objectives from "./pages/objectives";
 import Industries from "./pages/industries";
 import HowItWorks from "./pages/howItWorks";
@@ -18,127 +17,143 @@ import MainLayout from "./layouts/MainLayout";
 import { JobProvider } from "./context/JobContext";
 import MyJobs from "./pages/MyJobs";
 import Chat from "./pages/Chat.jsx";
+import Footer from "./components/Footer.jsx";
+import { ThemeContext } from "./context/ThemeContext";
+import "./App.css";
+import Messenger from "./pages/Messenger.jsx";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const App = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(true);
-
-  // Stranice bez headera
-  const hideHeader =
-    location.pathname === "/login" ||
-    location.pathname === "/sign-in" ||
-    location.pathname === "/home" ||
-    location.pathname === "/about" ||
-    location.pathname === "/skills" ||
-    location.pathname === "/post" 
-    ||location.pathname === "/chat";
-
   const toggleTheme = () => setDarkMode(!darkMode);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const hideHeader =
+    location.pathname === "/login" ||
+    location.pathname === "/sign-up" ||
+    location.pathname === "/chat";
+
   return (
-    <div
-      className={`app-container ${darkMode ? "dark-theme" : "light-theme"}`}
-    >
-      {!hideHeader && (
-        <Header
-          title="Global Skill Swap"
-          font="italic"
-          size="2.5rem"
-          color="blue"
-        />
-      )}
-      <JobProvider>
-        <Routes>
-          {/* 🌍 Landing Page */}
-          <Route
-            path="/"
-            element={
-              <main className="landing-page">
-                <nav className="top-nav">
-                  <div className="logo">GlobalSkillSwap</div>
-                  <div className="nav-links">
-                    <Link to="/about">About</Link>
-                    <Link to="/skills">Skills</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/sign-in" className="get-started-btn">
-                      Get Started
-                    </Link>
-                  </div>
-                </nav>
+    <AuthProvider>
+      <ThemeContext.Provider value={{ darkMode, toggleTheme }}>
+        <div
+          className={`app-container ${darkMode ? "dark-theme" : "light-theme"}`}
+        >
+          {!hideHeader && (
+            <Header
+              title="Global Skill Swap"
+              font="italic"
+              size="2.5rem"
+              color="blue"
+            />
+            
+          )}
 
-                <section className="hero-section">
-                  <div className="hero-text">
-                    <p className="hero-sub">The future of skill exchange</p>
-                    <h1 className="gradient-text">
-                      Accelerate Your{" "}
-                      <span className="gradient-text">Learning Journey</span>
-                    </h1>
-                    <p className="hero-desc">
-                      Exchange knowledge, earn SkillPoints, and grow with others.
-                      Build your network through teaching and learning — powered by
-                      community collaboration.
-                    </p>
-                    <div className="cta-buttons">
-                      <button
-                        onClick={() => navigate("/sign-in")}
-                        className="primary-btn"
-                      >
-                        Join Now
-                      </button>
-                      <button
-                        onClick={() => navigate("/login")}
-                        className="secondary-btn"
-                      >
-                        Log In
-                      </button>
-                    </div>
-                  </div>
+          <JobProvider>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <main className="landing-page">
+                    <nav className="top-nav">
+                      <div className="logo">GlobalSkillSwap</div>
+                      <div className="nav-links">
+                        <Link to="/about">About</Link>
+                        <Link to="/skills">Skills</Link>
+                        <Link to="/login">Login</Link>
+                        <Link to="/sign-up" className="get-started-btn">
+                          Get Started
+                        </Link>
+                      </div>
+                    </nav>
 
-                  <div className="floating-elements">
-                    <div className="bubble mentor"><span>🧠 Mentor</span></div>
-                    <div className="bubble ai"><span>🤖 AI Match</span></div>
-                    <div className="bubble learner"><span>🎓 Learner</span></div>
-                    <div className="bubble network"><span>🌍 Network</span></div>
-                  </div>
+                    <section className="hero-section">
+                      <div className="hero-text">
+                        <p className="hero-sub">The future of skill exchange</p>
+                        <h1 className="gradient-text">
+                          Accelerate Your{" "}
+                          <span className="gradient-text">
+                            Learning Journey
+                          </span>
+                        </h1>
+                        <p className="hero-desc">
+                          Exchange knowledge, earn SkillPoints, and grow with
+                          others. Build your network through teaching and
+                          learning — powered by community collaboration.
+                        </p>
+                        <div className="cta-buttons">
+                          <button
+                            onClick={() => navigate("/sign-up")}
+                            className="primary-btn"
+                          >
+                            Join Now
+                          </button>
+                          <button
+                            onClick={() => navigate("/login")}
+                            className="secondary-btn"
+                          >
+                            Log In
+                          </button>
+                        </div>
+                      </div>
 
-                </section>
+                      <div className="floating-elements">
+                        <div className="bubble mentor">
+                          <span>🧠 Mentor</span>
+                        </div>
+                        <div className="bubble ai">
+                          <span>🤖 AI Match</span>
+                        </div>
+                        <div className="bubble learner">
+                          <span>🎓 Learner</span>
+                        </div>
+                        <div className="bubble network">
+                          <span>🌍 Network</span>
+                        </div>
+                      </div>
+                    </section>
+                  </main>
+                }
+              />
 
-                <footer className="landing-footer">
-                  <p>© 2025 GlobalSkillSwap | Built for knowledge sharing</p>
-                  <button onClick={toggleTheme} className="theme-toggle">
-                    {darkMode ? "☀️ Light" : "🌙 Dark"}
-                  </button>
-                </footer>
-              </main>
-            }
-          />
+              {/* Zaštićena Home ruta */}
+              <Route
+                path="/home"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
 
-          {/* 📄 Ostale rute */}
-          <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/post" element={<Post />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/sign-up" element={<SignUp />} />
 
-            <Route path="/my-jobs" element={<MyJobs />} />
-          </Route>
-          <Route path="/objectives" element={<Objectives />} />
-          <Route path="/industries" element={<Industries />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/chat" element={<Chat />} />
+              <Route element={<MainLayout />}>
+                <Route path="/about" element={<About />} />
+                <Route path="/skills" element={<Skills />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/post" element={<Post />} />
+                <Route path="/my-jobs" element={<MyJobs />} />
+                <Route path="/messenger" element={<Messenger />} />
+              </Route>
 
+              <Route path="/objectives" element={<Objectives />} />
+              <Route path="/industries" element={<Industries />} />
+              <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/chat" element={<Chat />} />
+            </Routes>
+          </JobProvider>
 
-        </Routes>
-      </JobProvider>
-    </div>
+          <Footer />
+        </div>
+      </ThemeContext.Provider>
+    </AuthProvider>
   );
 };
 

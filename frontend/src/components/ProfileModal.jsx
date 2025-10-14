@@ -43,7 +43,9 @@ import "./ProfileModal.css";
         </div>
 
         <div className="modal-footer">
-          <button className="edit-btn" onClick={() => setIsEditing(true)}>✏️ Uredi profil</button>
+          <button className="edit-btn" onClick={() => {
+            navi
+            setIsEditing(true)}}>✏️ Uredi profil</button>
         </div>
       </div>
 

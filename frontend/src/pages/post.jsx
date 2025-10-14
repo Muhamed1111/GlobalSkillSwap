@@ -42,55 +42,58 @@ const Post = () => {
   return (
     <div className="create-job-wrapper">
       <div className="create-job-card">
-        <h1 className="gradient-text">Postavi novi posao 💼</h1>
+        <h1 className="gradient-text">Post job 💼</h1>
         <form className="create-job-form" onSubmit={handleSubmit}>
           <input
             name="jobTitle"
-            placeholder="Naziv posla"
+            placeholder="Job title"
             value={form.jobTitle}
             onChange={handleChange}
+            required
           />
           <input
             name="companyName"
-            placeholder="Kompanija"
+            placeholder="Company name"
             value={form.companyName}
             onChange={handleChange}
+            required
           />
           <input
             name="location"
-            placeholder="Lokacija"
+            placeholder="Location"
             value={form.location}
             onChange={handleChange}
+            required
           />
           <input
             name="employmentType"
-            placeholder="Tip zaposlenja"
+            placeholder="Type of employement"
             value={form.employmentType}
             onChange={handleChange}
+            required
           />
           <input
             name="salaryRange"
-            placeholder="Plata"
+            placeholder="Salary"
             value={form.salaryRange}
             onChange={handleChange}
+            required
           />
           <textarea
             name="jobDescription"
-            placeholder="Opis posla..."
+            placeholder="Job description..."
             value={form.jobDescription}
             onChange={handleChange}
           />
           <button type="submit" className="create-job-btn">
-            📤 Objavi posao
+            📤 Post job
           </button>
         </form>
 
         {status === "success" && (
-          <div className="success-popup">✅ Posao dodan u My Jobs!</div>
+          <div className="success-popup">✅ Successfully posted!</div>
         )}
-        {status === "error" && (
-          <div className="error-popup">⚠️ Popuni obavezna polja!</div>
-        )}
+        
       </div>
     </div>
   );

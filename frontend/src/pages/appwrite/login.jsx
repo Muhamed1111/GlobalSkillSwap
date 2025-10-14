@@ -1,126 +1,99 @@
-import React from 'react'
+import React, { useState, useContext } from "react";
 import loginBg from "../../asserts/images/login.png";
-import Button from '../../components/Button';
-import { Link } from "react-router-dom";
-/*import googleIcon from "../../asserts/icons/google.png";
-import linkedinIcon from "../../asserts/icons/linkedin.png";
-*/
+import Button from "../../components/Button";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
-const login = () => {
-    return (
-        <div
-            style={{
-                backgroundImage: `url(${loginBg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                height: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "0px",
-                margin: "0px",
-                paddingTop: "120px"
+const Login = () => {
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-            }}
-            className="login">
-            <div
-                className="login-card"
-                style={{
-                    backgroundColor: "rgba(0,0,0,0.6)",
-                    padding: "40px",
-                    borderRadius: "10px",
-                    color: "white",
-                    textAlign: "center",
-                    boxShadow: "0 4px 15px rgba(0,0,0,0.4)",
-                    width: "320px"
-                }}
-            >
-                <h3 style={{ fontSize: "26px", marginBottom: "25px", fontWeight: "600" }}>
-                    Login Page
-                </h3>
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setMessage("⏳ Logging in...");
+    try {
+      await login(email, password);
+      setMessage("✅ Login successful!");
+      setTimeout(() => navigate("/home"), 700);
+    } catch (err) {
+      setMessage("❌ " + err.message);
+    }
+  };
 
-                <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                    <label style={{ fontSize: "15px", textAlign: "left" }}>
-                        Email
-                        <input
-                            placeholder="example@gmail.com"
-                            type="email"
-                            required
-                            style={{
-                                width: "100%",
-                                padding: "8px",
-                                marginTop: "5px",
-                                borderRadius: "6px",
-                                border: "1px solid #ccc",
-                                fontSize: "14px",
-                            }}
-                        />
-                    </label>
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${loginBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingTop: "120px",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "rgba(0,0,0,0.6)",
+          padding: "40px",
+          borderRadius: "10px",
+          color: "white",
+          textAlign: "center",
+          width: "320px",
+        }}
+      >
+        <h3 style={{ fontSize: "26px", marginBottom: "25px" }}>Login</h3>
 
-                    <label style={{ fontSize: "15px", textAlign: "left" }}>
-                        Password
-                        <input
-                            placeholder="•••••••"
-                            type="password"
-                            required
-                            style={{
-                                width: "100%",
-                                padding: "8px",
-                                marginTop: "5px",
-                                borderRadius: "6px",
-                                border: "1px solid #ccc",
-                                fontSize: "14px",
-                            }}
-                        />
-                    </label>
+        <form onSubmit={handleLogin}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+            <label>
+              Email
+              <input
+                type="text"
+                placeholder="example@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+              />
+            </label>
 
-                    <Button
+            <label>
+              Password
+              <input
+                type="password"
+                placeholder="•••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+              />
+            </label>
 
-                        padding='10px'
-                        borderRadius='10px'
-                        color="#e8c428ff"
-                        text=' Sign in with Google'
-                        hoverColor="#726217ff"
-                    />
-                    <Button
+            <Button text="Log In" color="#e0d6a6ff" textColor="white" />
 
-                        padding='10px'
-                        borderRadius='10px'
-                        color='#e8c428ff'
-                        text='Sign in with LinkdIn'
-                        hoverColor="#726217ff"
-                    />
+            {message && (
+              <p style={{ color: "#FFD700", fontSize: "14px" }}>{message}</p>
+            )}
 
-                    <Button
-                        color="#e0d6a6ff"
-                        text="Log In"
-                        padding="10px"
-                        fontSize="1.5rem"
-                        borderRadius="10px"
-                        textColor="white"
-                        hoverColor="#d8b205ff"
-                        transition="0.35s ease"
-                    />
+            <p style={{ marginTop: "15px" }}>
+              Don’t have an account?{" "}
+              <Link
+                to="/sign-up"
+                style={{ color: "#e8c428ff", fontWeight: "600" }}
+              >
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
-                    <p style={{ marginTop: "15px", fontSize: "14px" }}>
-                        Don't have an account?{" "}
-                        <Link
-                            to="/sign-in"
-                            style={{
-                                color: "#e8c428ff",
-                                textDecoration: "none",
-                                fontWeight: "600",
-                            }}
-                        >
-                            Sign up
-                        </Link>
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    )
-}
-
-export default login
+export default Login;

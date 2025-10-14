@@ -13,7 +13,7 @@ const Sidebar = ({ active, onMenuToggle }) => {
         <Link to="/skills" onClick={onMenuToggle}>💡 Find Jobs</Link>
         <Link to="/post" onClick={onMenuToggle}>📝 Post Job</Link>
         <Link to="/my-jobs" onClick={onMenuToggle}>My Jobs</Link>
-        <Link to="/messanger" onClick={onMenuToggle}>Messenger</Link>
+        <Link to="/messenger" onClick={onMenuToggle}>Messenger</Link>
 
         <Link className="bottom-link" to="/">Log Out</Link>
         
