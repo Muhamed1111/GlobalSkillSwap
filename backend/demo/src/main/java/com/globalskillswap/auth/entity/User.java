@@ -45,7 +45,7 @@ public class User {
 
     @Column(name = "created_at")
     private Date createdAt = new Date(System.currentTimeMillis());
-
+    
     // ---------- Constructors ----------
     public User() {}
 
