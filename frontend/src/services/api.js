@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:8080/api/auth";
-
+const API_MAIN = "http://localhost:8080/api"
 // --- LOGIN ---
 export async function loginUser(email, password) {
   const response = await fetch(`${API_URL}/login`, {
@@ -49,4 +49,19 @@ export async function verifyToken() {
 // --- LOGOUT ---
 export function logoutUser() {
   localStorage.removeItem("token");
+}
+function authHeaders() {
+  const token = localStorage.getItem("token");
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+export async function getMyScore() {
+  const res = await fetch(`${API_MAIN}/me/score`, { headers: authHeaders() });
+  if (!res.ok) throw new Error("Failed to fetch score");
+  return res.json();
+}
+
+export async function getSkills() {
+  const res = await fetch(`${API_MAIN}/skills`, { headers: authHeaders() });
+  if (!res.ok) throw new Error("Failed to fetch skills");
+  return res.json();
 }

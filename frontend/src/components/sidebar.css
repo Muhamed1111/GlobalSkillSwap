@@ -1,0 +1,133 @@
+/* === SIDEBAR WRAPPER === */
+.sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  height: calc(100vh - 80px);
+  width: 270px;
+  background: linear-gradient(180deg, #0a001a 0%, #1a0938 100%);
+  border-right: 1px solid rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  scrollbar-color: rgba(155, 120, 255, 0.3) transparent;
+  scrollbar-width: thin;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+/* === TITLE === */
+.sidebar-title {
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #d8b4ff;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px #8a2be2;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* === NAVIGATION === */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(40, 0, 80, 0.3);
+  border: 1px solid rgba(150, 80, 255, 0.3);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 6px 0;
+  color: #e6dbff;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 0 8px rgba(90, 0, 180, 0.2);
+}
+
+.sidebar-nav a:hover {
+  background: linear-gradient(90deg, #8a2be2, #d8b4ff);
+  color: #0a001a;
+  transform: translateX(5px);
+  box-shadow: 0 0 15px rgba(200, 150, 255, 0.4);
+}
+
+.sidebar-nav a.active {
+  background: linear-gradient(90deg, #d8b4ff, #8a2be2);
+  color: #0a001a;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* === SECTION TITLES === */
+.sidebar-section-title {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #a07eff;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* === BOTTOM LINK === */
+.bottom-link {
+  margin-top: auto;
+  margin-bottom: 25px;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  color: #ff6b6b !important;
+  text-align: center;
+  transition: all 0.25s ease-in-out;
+}
+
+.bottom-link:hover {
+  background: linear-gradient(90deg, #ff6b6b, #d80000);
+  color: #fff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+/* === SCROLLBAR STYLE === */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(155, 120, 255, 0.4);
+  border-radius: 10px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 160, 255, 0.6);
+}
+
+/* === ANIMATIONS === */
+@keyframes sidebarSlideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.sidebar.active {
+  animation: sidebarSlideIn 0.35s ease forwards;
+}

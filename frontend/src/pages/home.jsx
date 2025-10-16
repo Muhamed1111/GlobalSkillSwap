@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import About from "../pages/about";
 import Skills from "../pages/skills";
@@ -17,6 +17,9 @@ import Footer from "../components/Footer";
 import { AuthContext } from "../context/AuthContext";
 import ProtectedRoute from "../routes/ProtectedRoute";
 
+// ✨ Import API funkcije
+import { getMyScore } from "../services/api";
+
 const user = { name: "Muha", lastName: "Mujic" };
 const head = ["Ime", "Prezime", "Bodovi"];
 const fields = ["name", "lastName", "points"];
@@ -32,7 +35,29 @@ const Home = () => {
   const navigate = useNavigate();
   const { user: loggedUser, logout } = useContext(AuthContext);
 
-  // 🧩 Ako je login ili sign-in, ne prikazuj layout
+  // 🧠 Lokalne state varijable za score podatke
+  const [email, setEmail] = useState("");
+  const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  // 📡 Fetch stvarnih podataka iz backend-a
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getMyScore();
+        setEmail(data.email);
+        setScore(data.score);
+      } catch (error) {
+        console.error("Error fetching score:", error);
+        logout(); // ako token ne valja ili istekne
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [logout]);
+
+  // 🧩 Ako je login ili sign-up ruta — bez layouta
   if (hideLayout) {
     return (
       <Routes>
@@ -70,18 +95,28 @@ const Home = () => {
                   <h3 className="title-h3">
                     👋 Welcome,{" "}
                     <span style={{ color: "#FFD700" }}>
-                      {loggedUser || "Guest"}
+                      {email || loggedUser || "Guest"}
                     </span>
                     ! <br />
-                    Your current score{" "}
-                    <span style={{ color: "#FFD700", fontWeight: "bold" }}>
-                      145 SkillPoints
-                    </span>
-                    , which makes you{" "}
-                    <span style={{ color: "#FFD700", fontWeight: "bold" }}>
-                      Top 10% mentors
-                    </span>{" "}
-                    this week. 🚀
+                    {loading ? (
+                      <span>Loading your stats...</span>
+                    ) : (
+                      <>
+                        Your current score{" "}
+                        <span
+                          style={{ color: "#FFD700", fontWeight: "bold" }}
+                        >
+                          {score} SkillPoints
+                        </span>
+                        , which makes you{" "}
+                        <span
+                          style={{ color: "#FFD700", fontWeight: "bold" }}
+                        >
+                          Top 10% mentors
+                        </span>{" "}
+                        this week. 🚀
+                      </>
+                    )}
                   </h3>
                 </div>
 
@@ -89,7 +124,9 @@ const Home = () => {
                 <Chart />
 
                 <section className="actions-section">
-                  <h2 className="actions-title">What do you want to do today?</h2>
+                  <h2 className="actions-title">
+                    What do you want to do today?
+                  </h2>
                   <div className="actions-grid">
                     <Button
                       text="🧠 Offer lesson"
@@ -129,8 +166,6 @@ const Home = () => {
                     onClick={logout}
                   />
                 </div>
-
-                
               </>
             }
           />

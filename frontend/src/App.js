@@ -134,9 +134,9 @@ const App = () => {
 
               <Route element={<MainLayout />}>
                 <Route path="/about" element={<About />} />
-                <Route path="/skills" element={<Skills />} />
+                <Route path="/mentors" element={<Skills />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/post" element={<Post />} />
+                <Route path="/post-job" element={<Post />} />
                 <Route path="/my-jobs" element={<MyJobs />} />
                 <Route path="/messenger" element={<Messenger />} />
               </Route>
