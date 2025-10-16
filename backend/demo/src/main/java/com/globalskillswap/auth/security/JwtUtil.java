@@ -1,34 +1,55 @@
 package com.globalskillswap.auth.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private final String SECRET_KEY = "globalSkillSwapSecret123"; // promijeni po želji
-    private final long EXPIRATION = 1000 * 60 * 60 * 24; // 24h
 
-    public String generateToken(String subject) {
+    private static final String SECRET_KEY = "globalSkillSwapSuperSecretKey12345678901234567890"; // mora biti 32+ karaktera
+
+    private Key getSignKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    // 🔹 Generisanje tokena
+    public String generateToken(String email) {
         return Jwts.builder()
-                .setSubject(subject)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .setSubject(email)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 5)) // 5h
+                .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public String validateToken(String token) {
+    // 🔹 Ekstrakcija emaila iz tokena
+    public String extractEmail(String token) {
+        return extractAllClaims(token).getSubject();
+    }
+
+    // 🔹 Validacija tokena
+    public boolean validateToken(String token) {
         try {
-            return Jwts.parser()
-                    .setSigningKey(SECRET_KEY)
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
+            extractAllClaims(token);
+            return true;
         } catch (Exception e) {
-            throw new RuntimeException("Invalid or expired token");
+            return false;
         }
     }
-}
 
+    private Claims extractAllClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSignKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+}

@@ -2,6 +2,7 @@ package com.globalskillswap.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
@@ -19,33 +20,22 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
-                // ✅ dozvoli sve auth endpoint-e
                 .requestMatchers("/api/auth/**").permitAll()
-                // ✅ dozvoli preflight (OPTIONS) zahtjeve
-                .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             );
-
-        // ✅ Važno ako koristiš JWT filter — dodaj ga ovdje prije UsernamePasswordAuthenticationFilter
-        // http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // 🔧 CORS konfiguracija (frontend React + deployment)
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-
-        // ✅ Ako koristiš lokalni React
         config.setAllowedOrigins(List.of(
             "http://localhost:3000",
-            "https://globalskillswap.netlify.app", // (ako budeš deployovao React)
-            "https://globalskillswap.site"         // (SmarterASP.NET frontend)
+            "https://globalskillswap.netlify.app"
         ));
-
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "X-Requested-With"));
+        config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -6,7 +6,9 @@ public class SignupRequest {
     private String username;
     private String email;
     private String password;
-
+    
+    public SignupRequest() {} 
+  
     // Getteri i setteri
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
