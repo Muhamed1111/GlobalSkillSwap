@@ -1,38 +1,37 @@
-const API_URL = "http://localhost:8080/api/auth"; // ako deployaš backend, promijeni na URL servera
+const API_URL = "http://localhost:8080/api/auth";
 
-// LOGIN
-export const loginUser = async (email, password) => {
+// --- LOGIN ---
+export async function loginUser(email, password) {
   const response = await fetch(`${API_URL}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
 
-  if (!response.ok) throw new Error("Login failed");
   const data = await response.json();
+  if (!response.ok) throw new Error(data.error || "Login failed");
 
-  // Backend vraća token u 'token' polju
-  localStorage.setItem("token", data.token);
-  return data.token;
-};
+  if (data.token) localStorage.setItem("token", data.token);
+  return data;
+}
 
-// SIGNUP
-export const signupUser = async (name, surname, username, email, password, education, isActive) => {
+// --- SIGNUP ---
+export async function signupUser(name, surname, username, email, password, education, isActive = true) {
   const response = await fetch(`${API_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, surname, username, email, password, isActive,education }),
+    body: JSON.stringify({ name, surname, username, email, password, education, isActive }),
   });
 
-  if (!response.ok) throw new Error("Signup failed");
   const data = await response.json();
+  if (!response.ok) throw new Error(data.error || "Signup failed");
 
-  localStorage.setItem("token", data.token);
-  return data.token;
-};
+  if (data.token) localStorage.setItem("token", data.token);
+  return data;
+}
 
-// VERIFY TOKEN
-export const verifyToken = async () => {
+// --- VERIFY TOKEN ---
+export async function verifyToken() {
   const token = localStorage.getItem("token");
   if (!token) throw new Error("No token found");
 
@@ -41,11 +40,13 @@ export const verifyToken = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  if (!response.ok) throw new Error("Invalid token");
-  return await response.text(); // backend vraća email iz tokena
-};
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || "Invalid token");
 
-// LOGOUT
-export const logoutUser = () => {
+  return data.email; // vraća email korisnika
+}
+
+// --- LOGOUT ---
+export function logoutUser() {
   localStorage.removeItem("token");
-};
+}

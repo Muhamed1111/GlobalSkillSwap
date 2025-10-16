@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ provjera tokena kad se app pokrene
+  // 🔍 Provjera tokena kad se app pokrene
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -23,21 +23,23 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  // ✅ login
+  // 🔑 Login
   const login = async (email, password) => {
-    const token = await loginUser(email, password);
+    const result = await loginUser(email, password);
     const verifiedEmail = await verifyToken();
     setUser(verifiedEmail);
+    return result;
   };
 
-  // ✅ signup
-  const signup = async (name, surname, username, email, password, education, isActive) => {
-    const token = await signupUser(name, surname, username, email, password, education,isActive);
+  // 🧾 Signup
+  const signup = async (name, surname, username, email, password, education, isActive = true) => {
+    const result = await signupUser(name, surname, username, email, password, education, isActive);
     const verifiedEmail = await verifyToken();
     setUser(verifiedEmail);
+    return result;
   };
 
-  // ✅ logout
+  // 🚪 Logout
   const logout = () => {
     logoutUser();
     setUser(null);
