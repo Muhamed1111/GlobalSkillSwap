@@ -4,9 +4,15 @@ import com.globalskillswap.auth.entity.User;
 import com.globalskillswap.auth.repo.UserRepository;
 import com.globalskillswap.auth.service.PointsService;
 import com.globalskillswap.auth.security.JwtUtil;
+
+
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/me")
@@ -24,22 +30,27 @@ public class MeController {
 
     @GetMapping("/score")
     public Map<String, Object> score(@RequestHeader("Authorization") String authHeader) {
-        // 🔑 Izvuci token iz Authorization hedera
+       
         String token = authHeader.replace("Bearer ", "");
-
-        // 📧 Ekstrakcija emaila iz JWT tokena
         String email = jwtUtil.extractEmail(token);
-
-        // 🔍 Pronađi korisnika u bazi
         User user = userRepo.findByEmail(email);
         if (user == null) {
             throw new RuntimeException("User not found");
         }
-
-        // 🧮 Izračunaj ukupne poene
         int score = pointsService.getUserScore(user.getId());
-
-        // 📤 Vrati odgovor kao JSON
         return Map.of("email", email, "score", score);
+    }
+    @GetMapping("/leaderboard")
+    public List<Map<String, Object>> leaderboard(){
+        List<User> users = userRepo.findAll();
+        return users.stream().map(
+            u-> {
+                Map<String,Object> map = new HashMap<>();
+                map.put("username",u.getUsername());
+                map.put("email",u.getEmail());
+                map.put("points",pointsService.getUserScore(u.getId()));
+                return map;
+            }
+        ).collect(Collectors.toList());
     }
 }

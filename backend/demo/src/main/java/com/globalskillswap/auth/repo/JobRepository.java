@@ -1,0 +1,11 @@
+package com.globalskillswap.auth.repo;
+
+import com.globalskillswap.auth.entity.Job;
+import com.globalskillswap.auth.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface JobRepository extends JpaRepository<Job, Long> {
+    List<Job> findByUser(User user);
+}
