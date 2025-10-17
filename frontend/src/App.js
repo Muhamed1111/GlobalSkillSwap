@@ -1,28 +1,30 @@
 import React, { useState } from "react";
 import { Routes, Route, useLocation, useNavigate, Link } from "react-router-dom";
-import Header from "./components/Header";
-import Login from "./pages/appwrite/login";
-import SignUp from "./pages/appwrite/sign-up";
-import Home from "./pages/home";
-import About from "./pages/about";
-import Skills from "./pages/skills";
-import Post from "./pages/post";
-import Objectives from "./pages/objectives";
-import Industries from "./pages/industries";
-import HowItWorks from "./pages/howItWorks";
-import Pricing from "./pages/pricing";
-import Resources from "./pages/resources";
-import Contact from "./pages/contact";
-import MainLayout from "./layouts/MainLayout";
-import { JobProvider } from "./context/JobContext";
-import MyJobs from "./pages/MyJobs";
+import Header from "./components/Header.jsx";
+import Login from "./pages/appwrite/login.jsx";
+import SignUp from "./pages/appwrite/sign-up.jsx";
+import Home from "./pages/home.jsx";
+import About from "./pages/about.jsx";
+import Skills from "./pages/skills.jsx";
+import Post from "./pages/post.jsx";
+import Objectives from "./pages/objectives.jsx";
+import Industries from "./pages/industries.jsx";
+import HowItWorks from "./pages/howItWorks.jsx";
+import Pricing from "./pages/pricing.jsx";
+import Resources from "./pages/resources.jsx";
+import Contact from "./pages/contact.jsx";
+import MainLayout from "./layouts/MainLayout.jsx";
+import { JobProvider } from "./context/JobContext.jsx";
+import MyJobs from "./pages/MyJobs.jsx";
 import Chat from "./pages/Chat.jsx";
 import Footer from "./components/Footer.jsx";
-import { ThemeContext } from "./context/ThemeContext";
-import "./App.css";
+import { ThemeContext } from "./context/ThemeContext.js";
+import "./style/App.css";
+
 import Messenger from "./pages/Messenger.jsx";
-import { AuthProvider } from "./context/AuthContext";
-import ProtectedRoute from "./routes/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import FindJobs from "./pages/findJobs.jsx";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -133,6 +135,7 @@ const App = () => {
               <Route path="/sign-up" element={<SignUp />} />
 
               <Route element={<MainLayout />}>
+                <Route path="/find-jobs" element={<FindJobs/>}/>
                 <Route path="/about" element={<About />} />
                 <Route path="/mentors" element={<Skills />} />
                 <Route path="/contact" element={<Contact />} />

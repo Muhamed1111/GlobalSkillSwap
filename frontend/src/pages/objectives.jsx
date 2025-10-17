@@ -1,5 +1,4 @@
-import React from "react";
-import "./objectives.css";
+import "../style/objectives.css";
 
 const Objectives = () => {
   const cards = [

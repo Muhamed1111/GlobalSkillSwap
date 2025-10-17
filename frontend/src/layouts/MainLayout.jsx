@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import MenuHeader from "../components/MenuHeader";
 import ProfileSidebar from "../components/ProfileSidebar";
-import "./MainLayout.css";
+import "../style/MainLayout.css";
 
 const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);

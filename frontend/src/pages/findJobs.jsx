@@ -2,18 +2,18 @@ import React, { useContext } from "react";
 import { JobContext } from "../context/JobContext";
 import "../style/myjobs.css";
 
-const MyJobs = () => {
-  const { myJobs } = useContext(JobContext);
+const FindJobs = () => {
+  const { jobs } = useContext(JobContext);
 
   return (
     <div className="my-jobs-wrapper">
       <h1 className="gradient-text">🧳 My Jobs</h1>
 
-      {myJobs.length === 0 ? (
+      {jobs.length === 0 ? (
         <p className="empty-text">You haven’t posted any jobs yet.</p>
       ) : (
         <div className="my-jobs-grid">
-          {myJobs.map((job) => (
+          {jobs.map((job) => (
             <div key={job.id} className="my-job-card">
               <h2>{job.title}</h2>
               <p><strong>🏢 Company:</strong> {job.companyName}</p>
@@ -32,4 +32,4 @@ const MyJobs = () => {
   );
 };
 
-export default MyJobs;
+export default FindJobs;

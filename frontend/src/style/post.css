@@ -1,0 +1,78 @@
+.create-job-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  background: radial-gradient(circle at top, #1a1042, #0a0520);
+  color: white;
+}
+
+.create-job-card {
+  background: linear-gradient(180deg, #1e164a, #0f0a2a);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(155, 120, 255, 0.2);
+  width: 600px;
+  text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ffce00, #c3a8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+.create-job-form input,
+.create-job-form textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin: 10px 0;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.create-job-form input::placeholder,
+.create-job-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.create-job-btn {
+  background: linear-gradient(90deg, #ffb703, #ffdd55);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: #1a1042;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.create-job-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+.status {
+  margin-top: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.status.success {
+  color: #0f0;
+}
+
+.status.error {
+  color: #ff5050;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import "./ProfileSidebar.css";
+import "../style/ProfileSidebar.css";
 
 const ProfileSidebar = ({ active, onClose }) => {
   return (

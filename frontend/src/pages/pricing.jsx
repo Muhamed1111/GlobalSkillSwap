@@ -1,5 +1,5 @@
 import React from "react";
-import "./pricing.css";
+import "../style/pricing.css";
 
 const Pricing = () => {
   const plans = [

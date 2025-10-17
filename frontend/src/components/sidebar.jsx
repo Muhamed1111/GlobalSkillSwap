@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./sidebar.css";
+import "../style/sidebar.css";
 import {
   FiHome,
   FiSearch,
@@ -50,7 +50,7 @@ const Sidebar = ({ active, onMenuToggle }) => {
         <NavLink to="/calendar" icon={<FiCalendar />} label="Sessions Calendar" />
 
         <h3 className="sidebar-section-title">Jobs & Career</h3>
-        <NavLink to="/jobs" icon={<FaBriefcase />} label="Find Jobs" />
+        <NavLink to="/find-jobs" icon={<FaBriefcase />} label="Find Jobs" />
         <NavLink to="/post-job" icon={<FaUserCog />} label="Post a Job" />
         <NavLink to="/my-jobs" icon={<FaChartLine />} label="My Jobs & Stats" />
 

@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
 import { JobContext } from "../context/JobContext";
-import "./post.css";
+import "../style/post.css";
 
 const Post = () => {
   const { addJob } = useContext(JobContext);
   const [form, setForm] = useState({
-    jobTitle: "",
+    title: "",
     companyName: "",
     location: "",
     employmentType: "",
-    salaryRange: "",
-    jobDescription: "",
+    salary: "",
+    description: "",
   });
   const [status, setStatus] = useState("");
 
@@ -18,36 +18,42 @@ const Post = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.jobTitle || !form.companyName) {
+    if (!form.title || !form.companyName) {
       setStatus("error");
       return;
     }
 
-    addJob(form);
-    setForm({
-      jobTitle: "",
-      companyName: "",
-      location: "",
-      employmentType: "",
-      salaryRange: "",
-      jobDescription: "",
-    });
-    setStatus("success");
-    setTimeout(() => setStatus(""), 2000);
+    try {
+      await addJob(form);
+      setStatus("success");
+      setForm({
+        title: "",
+        companyName: "",
+        location: "",
+        employmentType: "",
+        salary: "",
+        description: "",
+      });
+      setTimeout(() => setStatus(""), 2000);
+    } catch (err) {
+      console.error("❌ Error while posting job:", err);
+      setStatus("error");
+    }
   };
 
   return (
     <div className="create-job-wrapper">
       <div className="create-job-card">
-        <h1 className="gradient-text">Post job 💼</h1>
+        <h1 className="gradient-text">Post Job 💼</h1>
+
         <form className="create-job-form" onSubmit={handleSubmit}>
           <input
-            name="jobTitle"
+            name="title"
             placeholder="Job title"
-            value={form.jobTitle}
+            value={form.title}
             onChange={handleChange}
             required
           />
@@ -63,37 +69,39 @@ const Post = () => {
             placeholder="Location"
             value={form.location}
             onChange={handleChange}
-            required
           />
           <input
             name="employmentType"
-            placeholder="Type of employement"
+            placeholder="Type of employment"
             value={form.employmentType}
             onChange={handleChange}
-            required
           />
           <input
-            name="salaryRange"
-            placeholder="Salary"
-            value={form.salaryRange}
+            type="number"
+            name="salary"
+            placeholder="Salary (€)"
+            value={form.salary}
             onChange={handleChange}
-            required
           />
           <textarea
-            name="jobDescription"
+            name="description"
             placeholder="Job description..."
-            value={form.jobDescription}
+            value={form.description}
             onChange={handleChange}
+            rows={5}
           />
+
           <button type="submit" className="create-job-btn">
             📤 Post job
           </button>
         </form>
 
         {status === "success" && (
-          <div className="success-popup">✅ Successfully posted!</div>
+          <div className="status success">✅ Successfully posted!</div>
         )}
-        
+        {status === "error" && (
+          <div className="status error">⚠️ Please fill all required fields.</div>
+        )}
       </div>
     </div>
   );

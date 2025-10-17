@@ -1,45 +1,47 @@
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
-import About from "../pages/about";
-import Skills from "../pages/skills";
-import Contact from "../pages/contact";
 import Login from "./appwrite/login";
 import SignIn from "./appwrite/sign-up";
 import Table from "../components/Table";
 import Chart from "../components/Chart";
 import Button from "../components/Button";
 import { JobProvider } from "../context/JobContext";
-import Post from "./post";
-import MyJobs from "./MyJobs";
-import "./home.css";
-import Footer from "../components/Footer";
+import "../style/home.css";
 import { AuthContext } from "../context/AuthContext";
 import ProtectedRoute from "../routes/ProtectedRoute";
-
-// ✨ Import API funkcije
+import { getLeaderBoard } from "../services/api";
 import { getMyScore } from "../services/api";
 
-const user = { name: "Muha", lastName: "Mujic" };
-const head = ["Ime", "Prezime", "Bodovi"];
-const fields = ["name", "lastName", "points"];
-const data = [
-  { name: "Muhamed", lastName: "Mujić", points: 120 },
-  { name: "Ajdin", lastName: "Alihodžić", points: 95 },
-  { name: "Amar", lastName: "Hodžić", points: 180 },
-];
+
+const head = ["UserName", "Email", "SkillPoints"];
+const fields = ["username", "email", "points"];
+
 
 const Home = () => {
   const location = useLocation();
   const hideLayout = location.pathname.startsWith("/appwrite/");
   const navigate = useNavigate();
   const { user: loggedUser, logout } = useContext(AuthContext);
-
+  const [leaderBoard, setLeaderBoard] = useState([]);
   // 🧠 Lokalne state varijable za score podatke
   const [email, setEmail] = useState("");
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
-
+  useEffect(()=>{
+    const fetchedData = async () =>{
+      try{
+        const lBoard = await getLeaderBoard();
+        setLeaderBoard(lBoard);
+      }catch(err){
+        console.error("Greška pri dohvacanju leaderBoarda:",err);
+      }
+    };
+    fetchedData();
+  },[])
+  const filteredLeaderBoard = [...leaderBoard].sort(
+  (a, b) => b.points - a.points
+);
   // 📡 Fetch stvarnih podataka iz backend-a
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +58,9 @@ const Home = () => {
     };
     fetchData();
   }, [logout]);
+
+  const userPosition = filteredLeaderBoard.findIndex((i)=>
+  i.email===loggedUser) + 1;
 
   // 🧩 Ako je login ili sign-up ruta — bez layouta
   if (hideLayout) {
@@ -112,7 +117,7 @@ const Home = () => {
                         <span
                           style={{ color: "#FFD700", fontWeight: "bold" }}
                         >
-                          Top 10% mentors
+                          {userPosition}. ranked mentor
                         </span>{" "}
                         this week. 🚀
                       </>
@@ -147,15 +152,13 @@ const Home = () => {
                   title="Suggested mentors"
                   head={head}
                   fields={fields}
-                  array={data}
-                  user={user}
+                  array={leaderBoard}
                 />
                 <Table
-                  title="Top mentors"
+                  title="Leaderboard"
                   head={head}
                   fields={fields}
-                  array={data}
-                  user={user}
+                  array={filteredLeaderBoard}
                 />
 
                 <div style={{ textAlign: "center", marginTop: "20px" }}>
@@ -169,11 +172,7 @@ const Home = () => {
               </>
             }
           />
-          <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/post" element={<Post />} />
-          <Route path="/my-jobs" element={<MyJobs />} />
+          
         </Route>
       </Routes>
     </JobProvider>

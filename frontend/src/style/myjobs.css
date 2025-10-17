@@ -1,0 +1,60 @@
+.my-jobs-wrapper {
+  min-height: 90vh;
+  padding: 40px;
+  background: radial-gradient(circle at top, #1a1042, #09031a);
+  color: white;
+}
+
+.gradient-text {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  background: linear-gradient(90deg, #ffce00, #c3a8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-text {
+  text-align: center;
+  color: #aaa;
+  font-size: 1.2rem;
+}
+
+.my-jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  padding: 20px;
+}
+
+.my-job-card {
+  background: linear-gradient(180deg, #1e164a, #0f0a2a);
+  border-radius: 16px;
+  padding: 25px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 12px rgba(155, 120, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.my-job-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.my-job-card h2 {
+  color: #ffd700;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.my-job-card p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.job-description {
+  margin-top: 10px;
+  font-style: italic;
+  color: #cfcfcf;
+}

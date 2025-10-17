@@ -52,8 +52,13 @@ export function logoutUser() {
 }
 function authHeaders() {
   const token = localStorage.getItem("token");
-  return token ? { Authorization: `Bearer ${token}` } : {};
+  const headers = { "Content-Type": "application/json" };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+  return headers;
 }
+
 export async function getMyScore() {
   const res = await fetch(`${API_MAIN}/me/score`, { headers: authHeaders() });
   if (!res.ok) throw new Error("Failed to fetch score");
@@ -65,3 +70,60 @@ export async function getSkills() {
   if (!res.ok) throw new Error("Failed to fetch skills");
   return res.json();
 }
+export async function getLeaderBoard(){
+  const res = await fetch("http://localhost:8080/api/me/leaderboard",{
+    headers:authHeaders(),
+  })
+  if(!res.ok) throw new Error("Failed to fetch leaderboard");
+  return res.json();
+} 
+
+export async function getMentors(){
+  const token = localStorage.getItem("token");
+  const res = await fetch ("http://localhost:8080/api/me/leaderboard",{
+    headers:{Authorization: `Bearer ${token}`},
+  });
+  if(!res.ok) throw new Error("Failed to fetch mentors");
+  return res.json();
+}
+
+
+
+export async function getAllJobs() {
+  const res = await fetch(`${API_MAIN}/jobs`, {
+    method: "GET",
+    headers: authHeaders(),
+  });
+  if (!res.ok) throw new Error("Failed to fetch jobs");
+  return await res.json();
+}
+
+// promijeni ako deployaš backend
+
+
+export const getMyJobs = async (token) => {
+  const res = await fetch(`${API_MAIN}/jobs/my`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) throw new Error("Failed to fetch your jobs");
+  return await res.json();
+};
+
+export async function createJob(jobData) {
+  const response = await fetch("http://localhost:8080/api/jobs", {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(jobData),
+  });
+
+  if (!response.ok) {
+    const msg = await response.text();
+    console.error("Backend error:", msg);
+    throw new Error("Failed to post job");
+  }
+
+  return response.json();
+}
+

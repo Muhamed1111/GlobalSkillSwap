@@ -1,61 +1,49 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MenuHeader from "../components/MenuHeader";
 import Sidebar from "../components/sidebar";
 import ProfileSidebar from "../components/ProfileSidebar";
 import ProfileCard from "../components/profile";
-import "./skills.css";
+import "../style/skills.css";
 import Chat from "./Chat";
-
+import { getMentors } from "../services/api";
 
 const Skills = () => {
   const scrollRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [profileOpen, setProfileOpen] = useState(false);
   const [activeChatUser, setActiveChatUser] = useState(null);
-
+  const [users, setUsers] = useState([]);
   // 🔹 Dummy podaci
-  const users = [
-    {
-      id:568,
-      name: "Ajdin Alihodžić",
-      email: "ajdin@example.com",
-      points: 320,
-      lessons: 8,
-      rating: 4.9,
-      bio: "Frontend developer & mentor passionate about teaching React, UX/UI design and modern web development.",
-      avatar: "https://i.pravatar.cc/200?img=3",
-    },
-    {
-      id:565,
-      name: "Muhamed Mujić",
-      email: "mujic@example.com",
-      points: 652,
-      lessons: 33,
-      rating: 4.5,
-      bio: "Frontend developer focused on modern UX/UI design and mentoring junior developers.",
-      avatar: "https://i.pravatar.cc/200?img=4",
-    },
-    {
-      id: 156,
-      name: "Zemo Mujić",
-      email: "zemo@example.com",
-      points: 54,
-      lessons: 2,
-      rating: 4.4,
-      bio: "Backend developer specializing in Node.js and API architecture.",
-      avatar: "https://i.pravatar.cc/200?img=5",
-    },
-    {
-      id:123,
-      name: "Emina Hadžić",
-      email: "emina@example.com",
-      points: 415,
-      lessons: 17,
-      rating: 4.8,
-      bio: "UI/UX designer with a passion for intuitive and accessible design.",
-      avatar: "https://i.pravatar.cc/200?img=7",
-    },
-  ];
+
+  useEffect(() => {
+    const fetchedMentors = async () => {
+      try {
+        const data = await getMentors();
+        const formatted = data.map((u, index) => ({
+
+
+          id: index,
+          name: u.username || "Unknown",
+          email: u.email,
+          points: u.points || 0,
+          lessons: Math.floor(Math.random * 30) + 1,
+          rating: (Math.random() * 1.5 + 3.5).toFixed(1),
+          bio: "Mentor ready to exchange skills and knowledge with others.",
+          avatar: `https://i.pravatar.cc/200?img=${index + 3}`,
+
+
+        })
+        );
+        setUsers(formatted);
+      } catch (err) {
+        console.error("Greška pri dohvaćanju mentora:", err);
+      }
+    }
+    fetchedMentors();
+  }, []);
+
+
+  const sortedMentors = [...users].sort((a, b) => b.points - a.points);  
 
   // 🔹 Scroll funkcije
   const scrollLeft = () => scrollRef.current.scrollBy({ left: -350, behavior: "smooth" });
@@ -69,8 +57,6 @@ const Skills = () => {
     <div className="app">
       <MenuHeader onProfileToggle={() => setProfileOpen(true)} />
 
-      {/* Sidebar */}
-      <Sidebar active={sidebarOpen} onMenuToggle={toggleSidebar} />
 
       {/* Profile sidebar */}
       {profileOpen && (
@@ -104,9 +90,9 @@ const Skills = () => {
         <div className="carousel-container">
           <button className="carousel-btn left" onClick={scrollLeft}>◀</button>
           <div className="profiles-carousel" ref={scrollRef}>
-            {users.map((user, index) => (
-  <ProfileCard key={index} user={user} onChatOpen={setActiveChatUser} />
-))}
+            {sortedMentors.map((user, index) => (
+              <ProfileCard key={index} user={user} onChatOpen={setActiveChatUser} />
+            ))}
 
           </div>
           <button className="carousel-btn right" onClick={scrollRight}>▶</button>
@@ -114,7 +100,7 @@ const Skills = () => {
       </div>
 
 
-          {activeChatUser && (
+      {activeChatUser && (
         <div className="chat-popup">
           <div className="chat-popup-header">
             <h3>Chat with {activeChatUser.name}</h3>
@@ -124,8 +110,7 @@ const Skills = () => {
         </div>
       )}
 
-      {/* Dugme za otvaranje sidebar-a */}
-      <button onClick={toggleSidebar} className="menu-toggle-btn">☰</button>
+  
     </div>
   );
 };

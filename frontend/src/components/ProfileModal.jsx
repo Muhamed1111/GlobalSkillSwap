@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditProfileModal from "./EditProfileModal";
-import "./ProfileModal.css";
+import "../style/ProfileModal.css";
 
   const ProfileModal = ({ onClose, onChatOpen }) => {
   const [isEditing, setIsEditing] = useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import "./About.css";
+import "../style/About.css";
 import AboutBg from "../asserts/images/login.png"; // tvoja pozadinska slika
 
 const About = () => {

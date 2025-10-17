@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../App.css";
+
+import "../style/App.css"
 
 const Button = ({
   color = "#007bff",

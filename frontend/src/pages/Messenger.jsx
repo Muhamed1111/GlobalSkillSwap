@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Messenger.css";
+import "../style/Messenger.css";
 
 const friends = [
   {

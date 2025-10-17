@@ -1,5 +1,5 @@
 import React from "react";
-import "./howItWorks.css";
+import "../style/howItWorks.css";
 
 const HowItWorks = () => {
   const steps = [

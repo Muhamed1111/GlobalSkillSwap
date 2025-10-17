@@ -1,5 +1,5 @@
 import React from "react";
-import "./industries.css";
+import "../style/industries.css";
 
 const Industries = () => {
   const industries = [

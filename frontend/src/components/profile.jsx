@@ -1,5 +1,5 @@
 import React from "react";
-import "./profile.css";
+import "../style/profile.css";
 
 const ProfileCard = ({ user, onChatOpen }) => {
   return (
