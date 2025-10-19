@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getMyJobs, createJob, getAllJobs } from "../services/api";
+import { getMyJobs, createJob, getAllJobs, deleteJob } from "../services/api";
 
 export const JobContext = createContext();
 
@@ -38,6 +38,15 @@ export const JobProvider = ({ children }) => {
       console.error("❌ Error adding job:", err);
     }
   };
+  const removeJob= async(jobId)=>{
+    try{
+      const token = localStorage.getItem("token");
+      await deleteJob(jobId,token);
+      await fetchMyJobs();
+    }catch (err){
+      console.error("❌ Error deleting job:", err);
+    }
+  }
 
   useEffect(() => {
     fetchMyJobs();
@@ -46,7 +55,7 @@ export const JobProvider = ({ children }) => {
     fetchAllJobs();
   },[])
   return (
-    <JobContext.Provider value={{ myJobs, addJob, jobs }}>
+    <JobContext.Provider value={{ myJobs, addJob, jobs ,removeJob,fetchMyJobs,fetchAllJobs}}>
       {children}
     </JobContext.Provider>
   );

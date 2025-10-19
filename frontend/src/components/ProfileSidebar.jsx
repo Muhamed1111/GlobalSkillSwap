@@ -1,25 +1,57 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../style/ProfileSidebar.css";
+import { AuthContext } from "../context/AuthContext";
+
+function parseJwt(token) {
+  try {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
+  } catch (err) {
+    console.log("Invalid token:", err);
+    return null;
+  }
+}
 
 const ProfileSidebar = ({ active, onClose }) => {
+  const { user: loggedUser, logout } = useContext(AuthContext);
+  const [decodedUser, setDecodedUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const data = parseJwt(token);
+      setDecodedUser(data);
+    }
+  }, []);
+
+  // ✅ Ako imamo token, koristi podatke iz njega
+  // Ako nemamo, koristi AuthContext fallback
+  const userInfo = decodedUser || loggedUser;
+
   return (
     <div className={`profile-sidebar ${active ? "active" : ""}`}>
       <div className="profile-sidebar-header">
         <h2>👤 Tvoj profil</h2>
-        <button className="close-btn" onClick={onClose}>
-          ✖
-        </button>
+        <button className="close-btn" onClick={onClose}>✖</button>
       </div>
 
       <div className="profile-sidebar-content">
         <div className="profile-section">
           <img
-            src="https://i.pinimg.com/736x/b0/9e/ff/b09eff5c3f6fef96a21b0f474de01d43.jpg"
+            src="https://i.pravatar.cc/200?img=3"
             alt="Profile"
             className="profile-avatar"
           />
-          <h3>Ajdin Alihodžić</h3>
-          <p>💼 Web Developer | Mentor</p>
+          <h3>{userInfo?.name || "Nepoznat korisnik"}</h3>
+          <p>{userInfo?.sub || userInfo?.email || "Email nije pronađen"}</p>
+          <p>{userInfo?.username || "Nema korisničkog imena"}</p>
         </div>
 
         <div className="stats">
@@ -50,5 +82,5 @@ const ProfileSidebar = ({ active, onClose }) => {
     </div>
   );
 };
-export default ProfileSidebar;
 
+export default ProfileSidebar;

@@ -92,7 +92,6 @@ export async function getMentors(){
 export async function getAllJobs() {
   const res = await fetch(`${API_MAIN}/jobs`, {
     method: "GET",
-    headers: authHeaders(),
   });
   if (!res.ok) throw new Error("Failed to fetch jobs");
   return await res.json();
@@ -126,4 +125,32 @@ export async function createJob(jobData) {
 
   return response.json();
 }
+
+export async function applyToJob(jobId){
+  const res = await fetch(`${API_MAIN}/jobs/${jobId}/apply`,{
+    method:"POST",
+    headers: authHeaders(),
+  });
+  if(!res.ok)throw new Error("Failed to apply");
+  return await res.text();
+}
+
+export async function getApplicants(jobId){
+  const res = await fetch(`${API_MAIN}/jobs/${jobId}/applicants`,{
+    method: "GET",
+    headers: authHeaders(),
+  });
+  if(!res.ok) throw new Error("Failed to fetch applicants");
+  return await res.json()
+}
+export async function deleteJob(jobId){
+  const res = await fetch(`${API_MAIN}/jobs/${jobId}`,{
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  if(!res.ok) throw new Error("Failed to delete job");
+  return await res.text();
+}
+
+
 
