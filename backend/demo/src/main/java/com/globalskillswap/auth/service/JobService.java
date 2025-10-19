@@ -6,7 +6,6 @@ import com.globalskillswap.auth.repo.JobRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class JobService {
@@ -29,12 +28,17 @@ public class JobService {
         return jobRepo.findByUser(user);
     }
 
+    public Job getById(Long id) {
+        return jobRepo.findById(id).orElse(null);
+    }
+
     public boolean deleteJob(Long id, User user) {
-        Optional<Job> job = jobRepo.findById(id);
-        if (job.isPresent() && job.get().getUser().getId().equals(user.getId())) {
-            jobRepo.delete(job.get());
-            return true;
-        }
-        return false;
+        return jobRepo.findById(id)
+                .filter(job -> job.getUser().getId().equals(user.getId()))
+                .map(job -> {
+                    jobRepo.delete(job);
+                    return true;
+                })
+                .orElse(false);
     }
 }
