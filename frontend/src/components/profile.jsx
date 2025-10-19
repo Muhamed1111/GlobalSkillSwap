@@ -1,7 +1,12 @@
 import React from "react";
 import "../style/profile.css";
+import { useNotifications } from "../context/NotificationContext";
 
-const ProfileCard = ({ user, onChatOpen }) => {
+const ProfileCard = ({user, onChatOpen}) => {
+
+  const { sendRequestToMentor } = useNotifications();
+
+
   return (
     <div className="mentor-card">
       <img src={user.avatar} alt={user.name} className="mentor-avatar" />
@@ -29,6 +34,9 @@ const ProfileCard = ({ user, onChatOpen }) => {
         onClick={() => onChatOpen(user)}
       >
         💬 Chat
+      </button>
+       <button className="request-btn" onClick={() => sendRequestToMentor(user.id)}>
+                📩 Send request
       </button>
     </div>
   );

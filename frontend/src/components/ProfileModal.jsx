@@ -2,18 +2,9 @@ import React, { useState } from "react";
 import EditProfileModal from "./EditProfileModal";
 import "../style/ProfileModal.css";
 
+
   const ProfileModal = ({ onClose, onChatOpen }) => {
   const [isEditing, setIsEditing] = useState(false);
-
-  const user = {
-    name: "Ajdin Alihodžić",
-    email: "ajdin@example.com",
-    points: 320,
-    lessons: 8,
-    rating: 4.9,
-    bio: "Frontend developer & mentor passionate about teaching React, UX/UI design and modern web development.",
-    avatar: "https://i.pravatar.cc/200?img=3",
-  };
 
   return (
     <>
@@ -36,7 +27,7 @@ import "../style/ProfileModal.css";
                 <div><b>{user.rating} ⭐</b><span>Ocjena</span></div>
                 <button className="chat-btn" onClick={() => onChatOpen(user)}>
                   💬 Chat
-                </button>
+                </button>              
               </div>
             </div>
           </div>
