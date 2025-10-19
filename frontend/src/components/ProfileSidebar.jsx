@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "../style/ProfileSidebar.css";
 import { AuthContext } from "../context/AuthContext";
 
-function parseJwt(token) {
+export function parseJwt(token) {
   try {
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");

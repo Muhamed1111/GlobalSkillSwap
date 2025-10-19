@@ -25,6 +25,7 @@ import Messenger from "./pages/Messenger.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import FindJobs from "./pages/findJobs.jsx";
+import { NotificationProvider } from "./context/NotificationContext.jsx";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -40,6 +41,8 @@ const App = () => {
 
   return (
     <AuthProvider>
+      <NotificationProvider>
+
       <ThemeContext.Provider value={{ darkMode, toggleTheme }}>
         <div
           className={`app-container ${darkMode ? "dark-theme" : "light-theme"}`}
@@ -54,7 +57,11 @@ const App = () => {
             
           )}
 
+
+
+
           <JobProvider>
+
             <Routes>
               <Route
                 path="/"
@@ -142,6 +149,7 @@ const App = () => {
                 <Route path="/post-job" element={<Post />} />
                 <Route path="/my-jobs" element={<MyJobs />} />
                 <Route path="/messenger" element={<Messenger />} />
+
               </Route>
 
               <Route path="/objectives" element={<Objectives />} />
@@ -156,7 +164,9 @@ const App = () => {
           <Footer />
         </div>
       </ThemeContext.Provider>
+    </NotificationProvider>
     </AuthProvider>
+
   );
 };
 

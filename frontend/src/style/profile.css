@@ -74,3 +74,23 @@
 .chat-btn:hover {
   background-color: #ffb700;
 }
+
+
+/*Request btn*/
+
+.request-btn {
+  background: linear-gradient(90deg, #2c68f6, #00c6ff);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 10px;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.request-btn:hover {
+  background: linear-gradient(90deg, #00c6ff, #2c68f6);
+  transform: scale(1.05);
+}
