@@ -21,7 +21,6 @@ public class SecurityConfig {
     public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
         this.jwtAuthFilter = jwtAuthFilter;
     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -29,9 +28,8 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/me/achievements/**").authenticated()
                 .requestMatchers(HttpMethod.GET, "/api/skills/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/jobs").permitAll() // ✅ samo GET /api/jobs je javan
+                .requestMatchers(HttpMethod.GET, "/api/jobs").permitAll() 
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
