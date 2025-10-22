@@ -70,10 +70,6 @@ const MenuHeader = ({ onProfileToggle }) => {
           <i className="fas fa-user-circle"></i> Profile
         </button>
 
-        {/* 🚪 Logout */}
-        <Link to="/" className="logout-btn">
-          <i className="fas fa-sign-out-alt"></i> Log Out
-        </Link>
       </div>
     </header>
   );

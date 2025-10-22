@@ -1,0 +1,78 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.edit-modal {
+  background: #1e1e38;
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 0 20px rgba(143, 112, 255, 0.4);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.edit-modal h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffd700;
+}
+
+.edit-modal label {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.edit-modal input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  background: #2a2a4d;
+  color: white;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.save-btn {
+  background: linear-gradient(90deg, #8f70ff, #190e53);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.save-btn:hover {
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  background: #e63946;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cancel-btn:hover {
+  background: #c82333;
+}

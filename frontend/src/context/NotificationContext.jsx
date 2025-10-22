@@ -3,7 +3,7 @@ import {
   getNotifications,
   sendNotification,
   deleteNotification,
-} from "../services/api";
+} from "../services/notificationApi";
 
 const NotificationContext = createContext();
 

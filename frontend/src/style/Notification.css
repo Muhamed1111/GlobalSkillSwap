@@ -1,114 +1,115 @@
-/* 🪟 Glavni prozor notifikacija */
 .notification-window {
-  position: fixed;
-  top: 90px;
-  right: 40px;
-  width: 340px;
-  max-height: 500px;
-  background: rgba(25, 20, 60, 0.95);
-  border: 1px solid rgba(155, 120, 255, 0.3);
-  border-radius: 16px;
-  box-shadow: 0 0 25px rgba(155, 120, 255, 0.25);
-  overflow: hidden;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(10px);
-  color: white;
-  animation: fadeIn 0.3s ease forwards;
+  background: #111;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+  padding: 20px;
+  width: 420px;
+  margin: 40px auto;
+  font-family: "Poppins", sans-serif;
 }
 
-/* ✨ Animacija ulaska */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 🔹 Header sekcija */
 .notification-header {
-  padding: 15px 20px;
-  background: linear-gradient(90deg, #6c4eff, #8f70ff);
-  font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  color: gold;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
-.notification-header span {
-  color: #ffd54f;
+.clear-btn {
+  background: none;
+  border: 1px solid gold;
+  color: gold;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* 🔸 Telo sa listom notifikacija */
-.not-body {
-  padding: 10px 0;
-  overflow-y: auto;
+.clear-btn:hover {
+  background: gold;
+  color: black;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #222;
+  padding: 12px 0;
+  transition: background 0.2s ease;
+}
+
+.notification-item.unread {
+  background: rgba(255, 215, 0, 0.07);
+}
+
+.notification-content {
   flex: 1;
 }
 
-/* 📩 Jedna notifikacija */
-.notification-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 12px 18px;
-  border-bottom: 1px solid rgba(155, 120, 255, 0.1);
-  transition: background 0.3s ease;
-  cursor: pointer;
+.notification-title {
+  font-weight: 600;
+  color: gold;
+  margin-bottom: 5px;
 }
 
-.notification-item:hover {
-  background: rgba(155, 120, 255, 0.1);
-}
-
-/* 🔔 Nepročitane notifikacije */
-.notification-item.unread {
-  background: rgba(255, 215, 0, 0.08);
-  border-left: 4px solid #ffd54f;
-}
-
-/* 🕒 Vrijeme notifikacije */
-.notification-time {
-  font-size: 0.8rem;
-  color: #aaa;
-  align-self: flex-end;
-}
-
-/* 💬 Tekst notifikacije */
 .notification-text {
   font-size: 0.95rem;
-  color: #eee;
-  line-height: 1.4;
+  color: #ccc;
+  margin-bottom: 5px;
 }
 
-/* 🔗 Link na profil ili chat */
 .notification-link {
-  color: #ffd54f;
-  font-weight: 600;
+  color: gold;
+  font-weight: bold;
+  font-size: 0.9rem;
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
 .notification-link:hover {
-  color: #fff;
   text-decoration: underline;
 }
 
-/* 📱 Scrollbar */
-.not-body::-webkit-scrollbar {
-  width: 6px;
+.notification-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
 }
 
-.not-body::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #6c4eff, #8f70ff);
-  border-radius: 3px;
+.notification-time {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ff5555;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.delete-btn:hover {
+  color: red;
+}
+
+.no-results {
+  text-align: center;
+  color: #999;
+  padding: 20px 0;
+}
+
+.loading,
+.error {
+  text-align: center;
+  color: gold;
+  margin-top: 20px;
 }

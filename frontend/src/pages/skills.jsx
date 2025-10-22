@@ -22,7 +22,7 @@ const Skills = () => {
         const formatted = data.map((u, index) => ({
 
 
-          id: index,
+          id: u.id,
           name: u.username || "Unknown",
           email: u.email,
           points: u.points || 0,

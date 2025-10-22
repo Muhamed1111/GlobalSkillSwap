@@ -1,44 +1,116 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../style/Notification.css";
+import {
+  getNotifications,
+  deleteNotification,
+  deleteAllNotifications,
+} from "../services/notificationApi";
 
 const Notification = () => {
-  const notifications = [
-    {
-      time: "12:48",
-      text: "You applied for a new job. Now you can chat with your mentor.",
-      link: "link-to-your-mentor-profile",
-      status: "unread",
-    },
-    {
-      time: "11:32",
-      text: "Your mentor accepted your session request!",
-      link: "link-to-chat",
-      status: "read",
-    },
-  ];
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // 🔹 Učitaj notifikacije sa backenda
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getNotifications(); // koristi /me endpoint
+        setNotifications(data);
+      } catch (err) {
+        console.error("❌ Error loading notifications:", err);
+        setError("Failed to load notifications.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // 🔹 Obrisi jednu notifikaciju
+  const handleDelete = async (id) => {
+    try {
+      await deleteNotification(id);
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
+    } catch (err) {
+      console.error("❌ Error deleting notification:", err);
+    }
+  };
+
+  // 🔹 Obrisi sve notifikacije
+  const handleDeleteAll = async () => {
+    if (!window.confirm("Are you sure you want to clear all notifications?"))
+      return;
+    try {
+      await deleteAllNotifications();
+      setNotifications([]);
+    } catch (err) {
+      console.error("❌ Error deleting all notifications:", err);
+    }
+  };
+
+  // 🔹 Loading / Error states
+  if (loading)
+    return <p className="loading">Loading notifications...</p>;
+
+  if (error)
+    return <p className="error">{error}</p>;
 
   return (
     <div className="notification-window">
       <div className="notification-header">
-        Notifications <span>({notifications.length})</span>
+        <div className="header-left">
+          Notifications <span>({notifications.length})</span>
+        </div>
+        {notifications.length > 0 && (
+          <button className="clear-btn" onClick={handleDeleteAll}>
+            Clear All
+          </button>
+        )}
       </div>
+
       <div className="not-body">
-        {notifications.map((n, i) => (
-          <div
-            key={i}
-            className={`notification-item ${n.status === "unread" ? "unread" : ""}`}
-          >
-            <div className="notification-text">{n.text}</div>
-            <a href={n.link} className="notification-link">
-              View Details
-            </a>
-            <div className="notification-time">{n.time}</div>
-          </div>
-        ))}
+        {notifications.length > 0 ? (
+          notifications.map((n) => (
+            <div
+              key={n.id}
+              className={`notification-item ${n.read ? "" : "unread"}`}
+            >
+              <div className="notification-content">
+                <div className="notification-title">{n.title}</div>
+                <div className="notification-text">{n.message}</div>
+
+                {n.redirectUrl && (
+                  <a
+                    href={n.redirectUrl}
+                    className="notification-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Details
+                  </a>
+                )}
+              </div>
+
+              <div className="notification-meta">
+                <span className="notification-time">
+                  {new Date(n.createdAt).toLocaleString()}
+                </span>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(n.id)}
+                >
+                  ✖
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="no-results">No notifications yet 📭</p>
+        )}
       </div>
     </div>
   );
 };
 
 export default Notification;
-
