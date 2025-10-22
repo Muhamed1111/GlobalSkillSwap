@@ -47,9 +47,11 @@ public class AuthService {
         userRepository.save(user);
 
         Map<String, Object> claims = Map.of(
+                    
                 "name", user.getName(),
                 "surname", user.getSurname(),
-                "username", user.getUsername()
+                "username", user.getUsername(),
+                "id",user.getId()
         );
 
         String token = jwtUtil.generateToken(claims, user.getEmail());

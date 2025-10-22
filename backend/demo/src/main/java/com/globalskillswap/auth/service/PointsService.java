@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class PointsService {
 
     private final PointsLedgerRepository ledgerRepo;
+    
 
     public PointsService(PointsLedgerRepository ledgerRepo) {
         this.ledgerRepo = ledgerRepo;
     }
+    
 
     @Transactional
     public void addPoints(Long userId, int delta, String reason) {

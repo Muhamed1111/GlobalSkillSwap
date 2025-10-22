@@ -56,7 +56,7 @@ const Sidebar = ({ active, onMenuToggle }) => {
 
         <h3 className="sidebar-section-title">Learning & Growth</h3>
         <NavLink to="/achievements" icon={<FaMedal />} label="Achievements" />
-        <NavLink to="/ledger" icon={<FaCoins />} label="SkillPoints Ledger" />
+        <NavLink to="/ledger-history" icon={<FaCoins />} label="SkillPoints Ledger" />
         <NavLink to="/learning-path" icon={<FiBookOpen />} label="Learning Paths" />
         <NavLink to="/ai-recommendations" icon={<FiTrendingUp />} label="AI Recommendations" />
 

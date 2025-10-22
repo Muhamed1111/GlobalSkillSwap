@@ -26,6 +26,8 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import FindJobs from "./pages/findJobs.jsx";
 import { NotificationProvider } from "./context/NotificationContext.jsx";
+import SkillPointsLedger from "./pages/SkillPointsLedger.jsx";
+import Achievements from "./pages/Achievements.jsx";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -149,7 +151,8 @@ const App = () => {
                 <Route path="/post-job" element={<Post />} />
                 <Route path="/my-jobs" element={<MyJobs />} />
                 <Route path="/messenger" element={<Messenger />} />
-
+                <Route path="/ledger-history" element={<SkillPointsLedger/>}/>
+                <Route path="/achievements" element={<Achievements/>}/>
               </Route>
 
               <Route path="/objectives" element={<Objectives />} />

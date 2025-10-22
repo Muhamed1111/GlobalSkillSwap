@@ -29,6 +29,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/me/achievements/**").authenticated()
                 .requestMatchers(HttpMethod.GET, "/api/skills/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/jobs").permitAll() // ✅ samo GET /api/jobs je javan
                 .anyRequest().authenticated()

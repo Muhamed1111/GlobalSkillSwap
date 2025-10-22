@@ -5,6 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(180deg, #0d0818, #1b0e2b 80%);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ffd700;
+  color: #0d0818;
 }
 
 code {

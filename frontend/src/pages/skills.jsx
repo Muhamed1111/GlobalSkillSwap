@@ -6,15 +6,24 @@ import ProfileCard from "../components/profile";
 import "../style/skills.css";
 import Chat from "./Chat";
 import { getMentors } from "../services/api";
-
+import { parseJwt } from "../components/ProfileSidebar";
 const Skills = () => {
   const scrollRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [profileOpen, setProfileOpen] = useState(false);
   const [activeChatUser, setActiveChatUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [activeUser,setActiveUser]=useState(null);
   // 🔹 Dummy podaci
-
+  useEffect(() => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const data = parseJwt(token);
+        setActiveUser(data);
+        
+      }
+    }, []);
+  console.log(activeUser);
   useEffect(() => {
     const fetchedMentors = async () => {
       try {
@@ -44,6 +53,7 @@ const Skills = () => {
 
 
   const sortedMentors = [...users].sort((a, b) => b.points - a.points);  
+  const filteredUsers = sortedMentors.filter((mentor) => mentor.email !== activeUser.sub);
 
   // 🔹 Scroll funkcije
   const scrollLeft = () => scrollRef.current.scrollBy({ left: -350, behavior: "smooth" });
@@ -54,7 +64,7 @@ const Skills = () => {
   const toggleProfile = () => setProfileOpen((prev) => !prev);
 
   return (
-    <div className="app">
+    <div >
       <MenuHeader onProfileToggle={() => setProfileOpen(true)} />
 
 
@@ -66,10 +76,6 @@ const Skills = () => {
       {/* Glavni sadržaj */}
       <div
         className="skills-main"
-        style={{
-          marginLeft: sidebarOpen ? "250px" : "0",
-          transition: "margin-left 0.3s ease",
-        }}
       >
         {/* 🔹 Filter sekcija */}
         <div className="filter-bar">
@@ -90,7 +96,7 @@ const Skills = () => {
         <div className="carousel-container">
           <button className="carousel-btn left" onClick={scrollLeft}>◀</button>
           <div className="profiles-carousel" ref={scrollRef}>
-            {sortedMentors.map((user, index) => (
+            {filteredUsers.map((user, index) => (
               <ProfileCard key={index} user={user} onChatOpen={setActiveChatUser} />
             ))}
 

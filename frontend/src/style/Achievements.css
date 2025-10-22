@@ -1,0 +1,129 @@
+.achievements-page {
+  padding: 2rem;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(180deg, #0b061b, #130c2b 85%);
+  min-height: 100vh;
+}
+
+/* === HERO === */
+.achievements-hero {
+  text-align: center;
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+  border-radius: 20px;
+  background: radial-gradient(circle at top left, #1b0c3b, #0d0818 90%);
+  box-shadow: 0 0 50px rgba(168, 85, 247, 0.25),
+    inset 0 0 25px rgba(255, 215, 0, 0.1);
+}
+
+.achievements-hero h1 {
+  font-size: 2.4rem;
+  color: #ffd700;
+  font-weight: 700;
+  text-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+}
+
+.achievements-hero p {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  color: #d6c8ff;
+}
+
+.highlight {
+  color: #b19cff;
+  font-weight: 600;
+}
+
+.progress-bar {
+  margin: 1.5rem auto;
+  width: 80%;
+  height: 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ffd700, #a855f7);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+  transition: width 1.2s ease-in-out;
+}
+
+small {
+  color: #aaa;
+}
+
+/* === GRID === */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.8rem;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.badge:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+}
+
+.badge-inner img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+}
+
+.badge h3 {
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.badge p {
+  color: #c5c5c5;
+  font-size: 0.9rem;
+}
+
+.badge.unlocked {
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+}
+
+.badge.locked {
+  opacity: 0.5;
+  filter: grayscale(80%);
+}
+
+.locked-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 1.3rem;
+  color: #ff4747;
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .achievements-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .badge-inner img {
+    width: 60px;
+    height: 60px;
+  }
+}
