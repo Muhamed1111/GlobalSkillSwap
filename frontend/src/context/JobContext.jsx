@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getMyJobs, createJob, getAllJobs, deleteJob } from "../services/api";
+import { getMyJobs, createJob, getAllJobs, deleteJob } from "../services/jobApi";
 
 export const JobContext = createContext();
 

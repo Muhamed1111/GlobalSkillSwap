@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { JobContext } from "../context/JobContext";
-import { getApplicants } from "../services/api";
+import { getApplicants } from "../services/jobApi";
 import "../style/myjobs.css";
 
 const MyJobs = () => {

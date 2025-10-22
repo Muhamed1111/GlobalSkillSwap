@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserAchievements } from "../services/api";
+import { getUserAchievements } from "../services/pointsLedger";
 import "../style/Achievements.css";
 
 function Achievements() {

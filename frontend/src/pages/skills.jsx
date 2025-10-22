@@ -5,7 +5,7 @@ import ProfileSidebar from "../components/ProfileSidebar";
 import ProfileCard from "../components/profile";
 import "../style/skills.css";
 import Chat from "./Chat";
-import { getMentors } from "../services/api";
+import { getMentors } from "../services/userApi";
 import { parseJwt } from "../components/ProfileSidebar";
 const Skills = () => {
   const scrollRef = useRef(null);

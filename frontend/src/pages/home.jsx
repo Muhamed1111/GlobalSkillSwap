@@ -10,8 +10,8 @@ import { JobProvider } from "../context/JobContext";
 import "../style/home.css";
 import { AuthContext } from "../context/AuthContext";
 import ProtectedRoute from "../routes/ProtectedRoute";
-import { getLeaderBoard } from "../services/api";
-import { getMyScore } from "../services/api";
+import { getLeaderBoard } from "../services/pointsLedger";
+import { getMyScore } from "../services/pointsLedger";
 
 
 const head = ["UserName", "Email", "SkillPoints"];

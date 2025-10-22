@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { getLedgerHistory, getMyScore } from "../services/api";
+import { getLedgerHistory, getMyScore } from "../services/pointsLedger";
 import { AuthContext } from "../context/AuthContext";
 import "../style/SkillPointsLedger.css";
 
