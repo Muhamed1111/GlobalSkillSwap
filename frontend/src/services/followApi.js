@@ -23,9 +23,17 @@ export async function getFollowers(userId) {
   return res.json();
 }
 
-export async function getFollowing(userId) {
-  const res = await fetch(`http://localhost:8080/api/follow/followed/${userId}`, {
+export async function getFollowing(email) {
+  const res = await fetch(`http://localhost:8080/api/follow/followed/${email}`, {
     headers: authHeaders(),
   });
+  return res.json();
+}
+export async  function settingFollowing (userId){
+  const token = localStorage.getItem("token");
+  const res = await fetch(`http://localhost:8080/api/follow/following/check/${userId}`,{
+  headers: authHeaders()
+  })
+  if(!res.ok) throw new Error ("Jeboga ti");
   return res.json();
 }

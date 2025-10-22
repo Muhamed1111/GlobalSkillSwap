@@ -3,22 +3,20 @@ import "../style/MenuHeader.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React, { useState, useEffect, useRef } from "react";
 import Notification from "./Notification";
-
+import { notifyNumber } from "./Notification";
 const MenuHeader = ({ onProfileToggle }) => {
   const location = useLocation();
   const [showNotifications, setShowNotifications] = useState(false);
 
-  const notifRef = useRef(null); // referenca za click outside detekciju
+  const notifRef = useRef(null); 
 
-  // Aktivni link
+  
   const isActive = (path) => (location.pathname === path ? "active-link" : "");
 
-  // Otvori/zatvori klikom na zvono
+
   const toggleNotifications = () => {
     setShowNotifications((prev) => !prev);
   };
-
-  // Auto zatvaranje kad klikneš izvan prozora
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -52,12 +50,9 @@ const MenuHeader = ({ onProfileToggle }) => {
       </div>
 
       <div className="header-right">
-        {/* 🔔 Notifikacije */}
         <div className="notification-icon" onClick={toggleNotifications}>
           <i className="fas fa-bell"></i>
-          <span className="notification-badge">3</span>
-
-          {/* Prikaz prozora s notifikacijama */}
+          <span className="notification-badge">{notifyNumber}</span>
           {showNotifications && (
             <div ref={notifRef}>
               <Notification />

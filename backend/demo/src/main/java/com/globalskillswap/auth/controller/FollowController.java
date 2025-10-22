@@ -27,7 +27,6 @@ public class FollowController {
         this.jwtUtil = jwtUtil;
     }
 
-    // ✅ FOLLOW korisnika
     @PostMapping("/{followedId}")
     public ResponseEntity<?> followUser(
             @PathVariable Long followedId,
@@ -50,7 +49,6 @@ public class FollowController {
         return ResponseEntity.ok(follow);
     }
 
-    // ✅ UNFOLLOW korisnika
     @DeleteMapping("/{followedId}")
     public ResponseEntity<?> unfollowUser(
             @PathVariable Long followedId,
@@ -68,7 +66,7 @@ public class FollowController {
         return ResponseEntity.ok("User unfollowed successfully");
     }
 
- // ✅ Lista followers (ko prati određenog korisnika)
+    // ✅ Lista followers (ko prati određenog korisnika)
     @GetMapping("/followers/{email}")
     public ResponseEntity<List<User>> getFollowers(@PathVariable String email) {
         User user = userRepo.findByEmail(email);
@@ -81,14 +79,14 @@ public class FollowController {
 
         for (Follow f : follows) {
             User follower = userRepo.findById(f.getFollowerId()).orElse(null);
-            if (follower != null) followers.add(follower);
+            if (follower != null)
+                followers.add(follower);
         }
 
         System.out.println("Followers for " + email + ": " + followers.size());
         return ResponseEntity.ok(followers);
     }
 
-    // ✅ Lista following (koga user prati)
     @GetMapping("/following/{email}")
     public ResponseEntity<List<User>> getFollowing(@PathVariable String email) {
         User user = userRepo.findByEmail(email);
@@ -101,10 +99,32 @@ public class FollowController {
 
         for (Follow f : follows) {
             User followed = userRepo.findById(f.getFollowedId()).orElse(null);
-            if (followed != null) following.add(followed);
+            if (followed != null)
+                following.add(followed);
         }
 
         System.out.println("Following for " + email + ": " + following.size());
         return ResponseEntity.ok(following);
     }
+
+    @GetMapping("/following/check/{followingId}")
+    public ResponseEntity<Boolean> isFollowing(@PathVariable Long followingId,
+            @RequestHeader("Authorization") String authHeader) {
+        try {
+            String token = authHeader.substring(7);
+            String email = jwtUtil.extractEmail(token);
+            User currentUser = userRepo.findByEmail(email);
+
+            if (currentUser == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+            }
+
+            boolean follows = followService.existsByFollowerAndFollowed(currentUser.getId(), followingId);
+            return ResponseEntity.ok(follows);
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(false);
+        }
+    }
+
 }

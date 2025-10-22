@@ -5,17 +5,16 @@ import {
   deleteNotification,
   deleteAllNotifications,
 } from "../services/notificationApi";
-
+export let notifyNumber = 0;
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // 🔹 Učitaj notifikacije sa backenda
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getNotifications(); // koristi /me endpoint
+        const data = await getNotifications(); 
         setNotifications(data);
       } catch (err) {
         console.error("❌ Error loading notifications:", err);
@@ -27,7 +26,6 @@ const Notification = () => {
     fetchData();
   }, []);
 
-  // 🔹 Obrisi jednu notifikaciju
   const handleDelete = async (id) => {
     try {
       await deleteNotification(id);
@@ -37,7 +35,6 @@ const Notification = () => {
     }
   };
 
-  // 🔹 Obrisi sve notifikacije
   const handleDeleteAll = async () => {
     if (!window.confirm("Are you sure you want to clear all notifications?"))
       return;
@@ -49,12 +46,13 @@ const Notification = () => {
     }
   };
 
-  // 🔹 Loading / Error states
   if (loading)
     return <p className="loading">Loading notifications...</p>;
-
   if (error)
     return <p className="error">{error}</p>;
+
+
+notifyNumber = notifications.length;
 
   return (
     <div className="notification-window">

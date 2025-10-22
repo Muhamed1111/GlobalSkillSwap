@@ -45,6 +45,10 @@ const Follow = () => {
       .catch((err) => console.error("❌ Error loading follow data:", err));
   }, [activeTab, token, currentUserId]);
 
+   
+
+
+
   return (
     <div className="follow-page">
       <h1 className="follow-title">Connections</h1>
