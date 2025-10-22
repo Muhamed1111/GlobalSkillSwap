@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../style/ProfileSidebar.css";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
+import EditProfileModal from "./EditProfileModal";
 
+// ✅ JWT parser ostaje u komponenti
 export function parseJwt(token) {
   try {
     const base64Url = token.split(".")[1];
@@ -22,6 +25,8 @@ export function parseJwt(token) {
 const ProfileSidebar = ({ active, onClose }) => {
   const { user: loggedUser, logout } = useContext(AuthContext);
   const [decodedUser, setDecodedUser] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -31,54 +36,66 @@ const ProfileSidebar = ({ active, onClose }) => {
     }
   }, []);
 
-  // ✅ Ako imamo token, koristi podatke iz njega
-  // Ako nemamo, koristi AuthContext fallback
   const userInfo = decodedUser || loggedUser;
+
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
 
   return (
     <div className={`profile-sidebar ${active ? "active" : ""}`}>
       <div className="profile-sidebar-header">
-        <h2>👤 Tvoj profil</h2>
-        <button className="close-btn" onClick={onClose}>✖</button>
+        <h2> Profil </h2>
+        <button className="close-btn" onClick={onClose}>
+          ✖
+        </button>
       </div>
 
       <div className="profile-sidebar-content">
-        <div className="profile-section">
+        <div className="profile-avatar-section">
           <img
             src="https://i.pravatar.cc/200?img=3"
             alt="Profile"
             className="profile-avatar"
           />
           <h3>{userInfo?.name || "Nepoznat korisnik"}</h3>
-          <p>{userInfo?.sub || userInfo?.email || "Email nije pronađen"}</p>
-          <p>{userInfo?.username || "Nema korisničkog imena"}</p>
+          <p className="email">{userInfo?.sub || userInfo?.email || "Email nije pronađen"}</p>
+          <p className="username">@{userInfo?.username || "korisnik"}</p>
         </div>
 
-        <div className="stats">
+        <div className="profile-stats">
           <div>
             <h4>320</h4>
-            <p>Bodova</p>
+            <span>Bodova</span>
           </div>
           <div>
             <h4>8</h4>
-            <p>Časova</p>
+            <span>Časova</span>
           </div>
           <div>
             <h4>4.9 ⭐</h4>
-            <p>Ocjena</p>
+            <span>Ocjena</span>
           </div>
         </div>
 
-        <button className="edit-btn">✏️ Uredi profil</button>
-
-        <div className="about-section">
-          <h4>O meni</h4>
-          <p>
-            Frontend developer strastven prema učenju i dijeljenju znanja.
-            Fokusiran na React, dizajn i moderni web razvoj.
-          </p>
-        </div>
+        <button className="edit-btn" onClick={()=>setIsEditing(true)}>
+          ✏️ Uredi profil
+        </button>
       </div>
+
+      {isEditing && (
+  <EditProfileModal
+    user={userInfo}
+    onClose={() => setIsEditing(false)}
+    onSave={(updatedUser) => setDecodedUser(updatedUser)}
+  />
+)}
+
+      <Link to="/" className="logout-btn" onClick={handleLogout}>
+        🚪 Odjavi se
+      </Link>
     </div>
   );
 };

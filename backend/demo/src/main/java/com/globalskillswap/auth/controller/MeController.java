@@ -4,6 +4,8 @@ import com.globalskillswap.auth.entity.User;
 import com.globalskillswap.auth.repo.UserRepository;
 import com.globalskillswap.auth.service.PointsService;
 import com.globalskillswap.auth.security.JwtUtil;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -52,7 +54,60 @@ public class MeController {
             map.put("username", u.getUsername());
             map.put("email", u.getEmail());
             map.put("points", pointsService.getUserScore(u.getId()));
+            map.put("id", u.getId());
             return map;
         }).collect(Collectors.toList());
     }
+
+   @PutMapping("/update")
+public ResponseEntity<?> updateUser(
+        @RequestHeader("Authorization") String authHeader,
+        @RequestBody User updatedUser
+) {
+    try {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(401).body(Map.of("error", "Missing or invalid token"));
+        }
+
+        String token = authHeader.substring(7);
+        String email = jwtUtil.extractEmail(token);
+
+        User existingUser = userRepo.findByEmail(email);
+        if (existingUser == null) {
+            return ResponseEntity.status(404).body(Map.of("error", "User not found"));
+        }
+
+        // ✅ Provjeri da li već postoji drugi korisnik sa istim emailom
+        if (!updatedUser.getEmail().equals(existingUser.getEmail())
+                && userRepo.findByEmail(updatedUser.getEmail()) != null) {
+            return ResponseEntity.status(409).body(Map.of("error", "Email već postoji u sistemu!"));
+        }
+
+        // ✅ Provjeri da li već postoji drugi korisnik sa istim usernameom
+        if (!updatedUser.getUsername().equals(existingUser.getUsername())
+                && userRepo.findByUsername(updatedUser.getUsername()) != null) {
+            return ResponseEntity.status(409).body(Map.of("error", "Korisničko ime već postoji!"));
+        }
+
+        // ✅ Ažuriraj dozvoljena polja
+        existingUser.setUsername(updatedUser.getUsername());
+        existingUser.setEducation(updatedUser.getEducation());
+        existingUser.setUsername(updatedUser.getUsername());
+        existingUser.setEmail(updatedUser.getEmail());
+
+        userRepo.save(existingUser);
+
+        return ResponseEntity.ok(Map.of(
+                "message", "Profil uspješno ažuriran!",
+                "user", existingUser
+        ));
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.internalServerError()
+                .body(Map.of("error", "Greška pri ažuriranju profila"));
+    }
+}
+
+
 }

@@ -62,7 +62,7 @@ const Sidebar = ({ active, onMenuToggle }) => {
 
         <h3 className="sidebar-section-title">Community</h3>
         <NavLink to="/profile" icon={<FaUserGraduate />} label="My Profile" />
-        <NavLink to="/followers" icon={<FiUsers />} label="Followers / Following" />
+        <NavLink to="/follow" icon={<FiUsers />} label="Follow" />
         <NavLink to="/feed" icon={<FaGlobe />} label="Community Feed" />
         <NavLink to="/events" icon={<FiCalendar />} label="Workshops & Events" />
 
