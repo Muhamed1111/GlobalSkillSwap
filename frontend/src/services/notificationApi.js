@@ -1,4 +1,5 @@
 
+import { redirect } from "react-router-dom";
 import { authHeaders } from "./api";
 
 const BASE_URL = "http://localhost:8080/api";
@@ -27,6 +28,25 @@ export async function sendNotification(receiverId, type = "REQUEST") {
     if (!res.ok) throw new Error(`Failed to send notification (${res.status})`);
     return res.json();
 }
+
+    export async function sendFollowNotification(receiverId) {
+        const payload = {
+            userId: receiverId,
+            title: "New Follower 👥",
+            type: "FOLLOW",
+            redirectUrl: "/profile/" + receiverId,
+        };
+
+        const res = await fetch(`http://localhost:8080/api/notifications/send`, {
+            method: "POST",
+            headers: authHeaders(),
+            body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error(`Failed to send follow notification (${res.status})`);
+        return res.json();
+    }
+
 
 export async function deleteNotification(id) {
     const res = await fetch(`${BASE_URL}/notifications/${id}`, {

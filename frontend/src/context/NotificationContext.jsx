@@ -1,7 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { sendFollowNotification as sendFollowNotificationApi } from "../services/notificationApi";
+
 import {
   getNotifications,
   sendNotification,
+  sendFollowNotification,
   deleteNotification,
 } from "../services/notificationApi";
 
@@ -41,6 +44,19 @@ export const NotificationProvider = ({ children }) => {
       setError("Greška pri slanju zahtjeva.");
     }
   };
+
+  // 🔹 Pošalji notifikaciju za "Follow"
+const sendFollowNotification = async (userId) => {
+  try {
+    const data = await sendFollowNotificationApi(userId);
+    setNotifications((prev) => [data, ...prev]);
+    console.info("✅ Follow notifikacija poslana!");
+  } catch (err) {
+    console.error("❌ Greška pri slanju follow notifikacije:", err);
+    setError("Greška pri slanju follow notifikacije.");
+  }
+};
+
 
   // 🔹 Obriši notifikaciju
   const removeNotification = async (id) => {

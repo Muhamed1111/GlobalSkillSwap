@@ -4,9 +4,11 @@ import { useNotifications } from "../context/NotificationContext";
 import { settingFollowing} from "../services/followApi";
 const API_URL = "http://localhost:8080/api/follow"; 
 
+
 const ProfileCard = ({ user, onChatOpen }) => {
-  const { sendRequestToMentor } = useNotifications();
   const [isFollowing, setIsFollowing] = useState(false);
+  const { sendRequestToMentor, sendFollowNotification } = useNotifications();
+
 
   
   const handleFollow = async () => {
@@ -26,6 +28,7 @@ const ProfileCard = ({ user, onChatOpen }) => {
 
       if (res.ok) {
         setIsFollowing(true);
+        await sendFollowNotification(user.id);
       } else {
         const text = await res.text();
         alert(text || "Failed to follow user");
