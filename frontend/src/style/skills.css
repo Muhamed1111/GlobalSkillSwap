@@ -6,7 +6,7 @@
   padding-top: 20px;
 }
 
-/* 🔹 Filter sekcija */
+
 .filter-bar {
   display: flex;
   align-items: center;
@@ -145,4 +145,5 @@
   cursor: pointer;
   color: #222;
 }
+
 

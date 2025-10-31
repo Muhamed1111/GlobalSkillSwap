@@ -10,7 +10,8 @@ export async function getAllJobs() {
 // promijeni ako deployaš backend
 
 
-export const getMyJobs = async (token) => {
+export const getMyJobs = async () => {
+  const token = localStorage.getItem("token");
   const res = await fetch(`${API_MAIN}/jobs/my`, {
     headers: {
       Authorization: `Bearer ${token}`,

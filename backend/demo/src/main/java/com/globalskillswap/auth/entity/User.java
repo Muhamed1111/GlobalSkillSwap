@@ -40,13 +40,22 @@ public class User {
     private String provider;
 
     @NotBlank
-    @Column(nullable = false, length = 100) // bcrypt hash ima ~60 karaktera
+    @Column(nullable = false, length = 100)
     private String password;
 
     @Column(name = "created_at")
     private Date createdAt = new Date(System.currentTimeMillis());
-    
-    // ---------- Constructors ----------
+
+    @Column(name = "skill_points", nullable = false)
+    private int skillPoints = 0;
+
+    @Column(name = "lessons_given", nullable = false)
+    private int lessonsGiven = 0;
+
+    @Column(name = "lessons_received", nullable = false)
+    private int lessonsReceived = 0;
+
+  
     public User() {}
 
     public User(String name, String surname, String username, String email, String password) {
@@ -58,7 +67,7 @@ public class User {
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
-    // ---------- Getteri i setteri ----------
+   
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -88,4 +97,13 @@ public class User {
 
     public Date getCreatedAt() { return createdAt; }
     public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+
+    public int getSkillPoints() { return skillPoints; }
+    public void setSkillPoints(int skillPoints) { this.skillPoints = skillPoints; }
+
+    public int getLessonsGiven() { return lessonsGiven; }
+    public void setLessonsGiven(int lessonsGiven) { this.lessonsGiven = lessonsGiven; }
+
+    public int getLessonsReceived() { return lessonsReceived; }
+    public void setLessonsReceived(int lessonsReceived) { this.lessonsReceived = lessonsReceived; }
 }

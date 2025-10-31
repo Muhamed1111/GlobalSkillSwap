@@ -20,9 +20,7 @@ export const JobProvider = ({ children }) => {
 
   const fetchMyJobs = async () => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const data = await getMyJobs(token);
+      const data = await getMyJobs();
       setMyJobs(data);
     } catch (err) {
       console.error("❌ Error fetching jobs:", err);

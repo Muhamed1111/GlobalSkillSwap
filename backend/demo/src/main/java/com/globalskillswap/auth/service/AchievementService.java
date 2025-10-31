@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.globalskillswap.auth.entity.AchievementTemplate;
-import com.globalskillswap.auth.entity.User;
 import com.globalskillswap.auth.entity.UserAchievement;
 import com.globalskillswap.auth.repo.AchievementsRepository;
 import com.globalskillswap.auth.repo.UserAchievementsRepository;
@@ -43,4 +42,26 @@ public class AchievementService{
         }
         throw new RuntimeException("Achievements not found or already possesed");
     }    
+    public void unlockIfEligible(Long userId, String code) {
+    List<AchievementTemplate> templates = templateRepo.findAll();
+
+    AchievementTemplate target = templates.stream()
+            .filter(t -> t.getCode().equalsIgnoreCase(code))
+            .findFirst()
+            .orElse(null);
+
+    if (target == null) return;
+
+    List<UserAchievement> userAchievements = userAchievementRepo.findByUserId(userId);
+
+    for (UserAchievement ua : userAchievements) {
+        if (ua.getAchievement().getId().equals(target.getId()) && !ua.isUnlocked()) {
+            ua.setUnlocked(true);
+            ua.setUnlockedAt(OffsetDateTime.now());
+            userAchievementRepo.save(ua);
+            return;
+        }
+    }
+}
+
 }

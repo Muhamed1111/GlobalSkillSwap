@@ -28,6 +28,8 @@ import FindJobs from "./pages/findJobs.jsx";
 import { NotificationProvider } from "./context/NotificationContext.jsx";
 import SkillPointsLedger from "./pages/SkillPointsLedger.jsx";
 import Achievements from "./pages/Achievements.jsx";
+import SkillExchange from "./pages/SkillExchange.jsx";
+import SessionsCalendar from "./pages/SessionsCalendar.jsx";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -137,12 +139,14 @@ const App = () => {
                   <Route path="/mentors" element={<Skills />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/post-job" element={<Post />} />
+                  <Route path="/calendar" element={<SessionsCalendar/>} />
                   <Route path="/my-jobs" element={<MyJobs />} />
                   <Route path="/messenger" element={<Messenger />} />
                   <Route path="/follow" element={<Follow />} />
                   <Route path="/messenger" element={<Messenger />} />
                   <Route path="/ledger-history" element={<SkillPointsLedger />} />
                   <Route path="/achievements" element={<Achievements />} />
+                  <Route path="/exchange" element={<SkillExchange />} />
                 </Route>
                 <Route path="/objectives" element={<Objectives />} />
                 <Route path="/industries" element={<Industries />} />

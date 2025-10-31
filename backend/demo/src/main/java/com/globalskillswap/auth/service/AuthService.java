@@ -42,6 +42,7 @@ public class AuthService {
                 request.getUsername(),
                 request.getEmail(),
                 encodedPassword
+                
         );
         user.setCreatedAt(Date.valueOf(LocalDate.now()));
         userRepository.save(user);
@@ -70,34 +71,36 @@ public class AuthService {
     }
 
     // ---------- PRIJAVA ----------
-    public Map<String, Object> login(LoginRequest request) {
-        User user = Optional.ofNullable(userRepository.findByEmail(request.getEmail()))
-                .orElseThrow(() -> new RuntimeException("Korisnik ne postoji!"));
+   public Map<String, Object> login(LoginRequest request) {
+    User user = Optional.ofNullable(userRepository.findByEmail(request.getEmail()))
+            .orElseThrow(() -> new RuntimeException("Korisnik ne postoji!"));
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Pogrešna lozinka!");
-        }
-
-        Map<String, Object> claims = Map.of(
-                "name", user.getName(),
-                "surname", user.getSurname(),
-                "username", user.getUsername()
-        );
-
-        String token = jwtUtil.generateToken(claims, user.getEmail());
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Prijava uspješna!");
-        response.put("token", token);
-        response.put("user", Map.of(
-                "name", user.getName(),
-                "surname", user.getSurname(),
-                "username", user.getUsername(),
-                "email", user.getEmail(),
-                "createdAt", user.getCreatedAt()
-        ));
-        return response;
+    if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        throw new RuntimeException("Pogrešna lozinka!");
     }
+
+    Map<String, Object> claims = Map.of(
+            "id", user.getId(),
+            "name", user.getName(),
+            "surname", user.getSurname(),
+            "username", user.getUsername()
+    );
+
+    String token = jwtUtil.generateToken(claims, user.getEmail());
+
+    Map<String, Object> response = new HashMap<>();
+    response.put("message", "Prijava uspješna!");
+    response.put("token", token);
+    response.put("user", Map.of(
+            "name", user.getName(),
+            "surname", user.getSurname(),
+            "username", user.getUsername(),
+            "email", user.getEmail(),
+            "createdAt", user.getCreatedAt()
+    ));
+    return response;
+}
+
 
     // ---------- VALIDACIJA TOKENA ----------
     public boolean verifyToken(String token) {

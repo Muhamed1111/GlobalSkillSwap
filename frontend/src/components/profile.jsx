@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../style/profile.css";
-import { useNotifications } from "../context/NotificationContext";
-import { settingFollowing} from "../services/followApi";
-const API_URL = "http://localhost:8080/api/follow"; 
+const API_URL = "http://localhost:8080/api/follow";
 
-const ProfileCard = ({ user, onChatOpen }) => {
-  const { sendRequestToMentor } = useNotifications();
+const ProfileCard = ({ user, onChatOpen, onSendRequest }) => {
   const [isFollowing, setIsFollowing] = useState(false);
 
-  
   const handleFollow = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -57,21 +53,6 @@ const ProfileCard = ({ user, onChatOpen }) => {
     }
   };
 
-
-   useEffect(() => {
-  const loadFollowing = async () => {
-    try {
-      const following = await settingFollowing(user.id);
-      setIsFollowing(following);
-    } catch (err) {
-      console.error("Error loading follow state:", err);
-    }
-  };
-  if (user?.id) loadFollowing();
-}, [user.id]); // ✅ koristi samo id
-
-
-
   return (
     <div className="mentor-card">
       <img src={user.avatar} alt={user.name} className="mentor-avatar" />
@@ -94,28 +75,26 @@ const ProfileCard = ({ user, onChatOpen }) => {
       </div>
 
       <div className="mentor-actions">
-        {/* 💬 Chat */}
+        {/* Chat */}
         <button className="chat-btn" onClick={() => onChatOpen(user)}>
           💬 Chat
         </button>
 
-        {/* 📩 Request */}
+        {/* ✅ Skill Exchange Send Request */}
         <button
           className="request-btn"
-          onClick={() => sendRequestToMentor(user.id)}
+          onClick={() => onSendRequest(user)}
         >
-          📩 Send request
+          📩 Request
         </button>
 
-        {/* 👥 Follow / Unfollow */}
+        {/* Follow / Unfollow */}
         {!isFollowing ? (
           <button className="follow-btn" onClick={handleFollow}>
             ➕ Follow
           </button>
         ) : (
-          <
-          button className="unfollow-btn" onClick={handleUnfollow}
-          >
+          <button className="unfollow-btn" onClick={handleUnfollow}>
             ❌ Unfollow
           </button>
         )}

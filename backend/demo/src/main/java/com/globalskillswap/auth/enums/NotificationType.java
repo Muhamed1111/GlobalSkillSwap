@@ -7,3 +7,4 @@ public enum NotificationType {
     WARNING,   
     SUCCESS
 }
+ 
